@@ -1,0 +1,13 @@
+@import '../../style/mixin';
+
+$title-line-height:36px;
+$mt:3px;
+
+.main-sider {
+  @include sider;
+  height: inherit;
+
+  &-menu {
+    min-height: 100%;
+  }
+}
