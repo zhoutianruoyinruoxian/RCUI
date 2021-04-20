@@ -1,17 +1,16 @@
 import React from 'react';
-import type { ReactDOM } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import routeList, { RouteItem } from 'src/config/router.config';
 
 type RouteTransform = (list: RouteItem[], path?: string) => Promise<any[]>;
 
-const routeTransform: RouteTransform = async (list, path = '') => {
+const routeTransform: RouteTransform = async (list) => {
   let routerList: JSX.Element[] = [];
   for (let i = 0; i < list.length; i++) {
     const route = list[i];
     if (route.redirect) {
       routerList.push(
-        <Redirect exact from={path + route.path} to={path + route.redirect} key={path + route.path} />,
+        <Redirect exact from={route.path} to={route.redirect} key={route.path} />,
       );
       continue;
     }
@@ -22,7 +21,7 @@ const routeTransform: RouteTransform = async (list, path = '') => {
       let exact = true;
       if (route.routes) {
         exact = false;
-        children = await routeTransform(route.routes, path + route.path);
+        children = await routeTransform(route.routes);
       }
       routerList.push(
         <Route
@@ -33,14 +32,14 @@ const routeTransform: RouteTransform = async (list, path = '') => {
               {children}
             </Component>
           }
-          path={path + route.path}
-          key={path + route.path}
+          path={route.path}
+          key={route.path}
         />,
       );
       continue;
     }
     if (route.routes) {
-      routerList = routerList.concat(await routeTransform(route.routes, path + route.path));
+      routerList = routerList.concat(await routeTransform(route.routes));
       continue;
     }
   }

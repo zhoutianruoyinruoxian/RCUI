@@ -1,13 +1,42 @@
 @import '../../style/mixin';
+@import '../../style/variable';
 
+$main-sider: 'main-sider';
 $title-line-height:36px;
-$mt:3px;
 
-.main-sider {
+.#{$main-sider} {
   @include sider;
   height: inherit;
+  line-height: $title-line-height;
 
   &-menu {
+    padding: 20px 0;
     min-height: 100%;
+  }
+
+  &-sub-menu {
+    min-height: 100%;
+
+    &-li {
+
+      a {
+        display: block;
+        color: $default-color;
+      }
+
+      &.selected a {
+        color: $primary-color;
+        background-color: rgba($primary-color, 0.15);
+      }
+
+      &:hover a {
+        color: $primary-color;
+      }
+    }
+  }
+
+  &-menu-title {
+    margin: 4px 0 8px;
+    padding: 0 16px 0 40px;
   }
 }

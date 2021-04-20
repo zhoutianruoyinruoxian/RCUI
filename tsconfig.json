@@ -2,7 +2,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "sourceMap": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "module": "commonjs",
     "target": "ESNext",
     "jsx": "react",
@@ -12,16 +12,13 @@
     "baseUrl": ".",
     "locale": "zh-cn",
     "paths": {
+      "rcui":[
+        "./components"
+      ],
       "src": [
         "./src"
       ],
-      "api": [
-        "./src/api"
-      ],
       "@": [
-        "./src/components"
-      ],
-      "raui": [
         "./src/components"
       ],
       "containers": [
@@ -50,6 +47,7 @@
     ]
   },
   "include": [
+    "./components/**/*",
     "./src/**/*"
   ],
   "exclude": [

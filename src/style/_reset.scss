@@ -2,8 +2,22 @@ body {
   min-width: 1200px;
 }
 
+h1 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+a {
+  user-select: none;
+}
+
 a.normal {
   color: #fff;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
 .ant-layout-content {

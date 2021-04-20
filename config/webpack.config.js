@@ -6,7 +6,6 @@ const webpack = require('webpack');
 const resolve = require('resolve');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const RemarkHTML = require('remark-html');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -303,6 +302,7 @@ module.exports = function (webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
+        'rcui': '../components',
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -516,9 +516,9 @@ module.exports = function (webpackEnv) {
                 {
                   loader: 'markdown-loader',
                   options: {
-                    remarkOptions: {
-                      plugins: [RemarkHTML],
-                    },
+                    // remarkOptions: {
+                    //   plugins: [RemarkHTML],
+                    // },
                   },
                 },
               ],

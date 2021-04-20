@@ -1,122 +1,68 @@
-import React, { PureComponent, ReactNode } from 'react';
-import { Layout, Menu } from 'antd';
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom';
-import isEqual from 'lodash-es/isEqual';
+import React, { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import type BasicProps from '../types/BasicProps';
 import { RouteItem } from 'src/config/router.config';
 import './style.scss';
+import classNames from 'classnames';
 
-const { Sider } = Layout;
-
-interface LeftNavProps {
+interface LeftNavProps extends BasicProps {
   routeList?: RouteItem[];
   hideMenu?: boolean;
 }
 
-const initialState = {
-  openKeys: [],
-  selectedKeys: [],
-};
+export default function LeftNav({ prefixCls, routeList }: LeftNavProps) {
 
-type Istate = Readonly<typeof initialState>;
-class LeftNav extends PureComponent<LeftNavProps & RouteComponentProps, Istate> {
-  readonly state: Istate = initialState;
-  componentDidMount() {
-    const MenuKey = this.getMenuKey(this.props.location.pathname);
-    this.setMenu(MenuKey);
-  }
+  const { pathname } = useLocation();
+  const [selectedKey, setSelectedKey] = useState<string>();
 
-  UNSAFE_componentWillReceiveProps(nextProps: any) {
-    const oldMenuKey = this.getMenuKey(this.props.location.pathname);
-    const newMenuKey = this.getMenuKey(nextProps.location.pathname);
-    if (isEqual(oldMenuKey, newMenuKey)) return;
-    this.setMenu(newMenuKey);
-  }
+  useEffect(() => {
+    setSelectedKey(pathname);
+  }, [pathname]);
 
-  setMenu = (menuKeys) => {
-    const selectedKeys = this.addUp(menuKeys);
-    this.setState({
-      openKeys: selectedKeys,
-      selectedKeys: selectedKeys,
-    });
-  }
+  const getMenu = (routeList: LeftNavProps['routeList'], isSub = false) => {
+    const menuList: ReactNode[] = [];
 
-  addUp(list: Array<string>) {
-    let all: string;
-    return list.map((o, i) => {
-      if (i === 0) {
-        all = o;
-      }
-      if (i > 0) {
-        (all as string) += o;
-      }
-      return all;
-    });
-  }
-
-  onOpenChange = (openKeys: string[]) => {
-    this.setState({
-      openKeys,
-    });
-  }
-
-  getMenuKey = (path: string) => path.match(/\/[a-zA-Z0-9]*/g);
-
-
-  generateMenuDom = (routeList: LeftNavProps['routeList'], subPath = ''): ReactNode[] => {
-    let menuList: ReactNode[] = [];
-    let menuListItem: ReactNode;
-    routeList.forEach(route => {
+    routeList.map(route => {
       if (!route.name || route.hideInMenu) return;
-      const path = subPath + route.path;
-      if (route.routes && !route.hideChildrenInMenu) {
-        const childMenuList = this.generateMenuDom(route.routes, path);
-        menuListItem = (
-          <Menu.SubMenu
-            key={path}//SubMenu的key值针对的是openKeys
-            icon={route.icon}
-            title={
-              <span>
-                <span>{route.name}</span>
-              </span>
-            }
-          >
-            {childMenuList}
-          </Menu.SubMenu>
-        );
-      } else {
-        menuListItem = (
-          <Menu.Item
-            key={path}//Item的key值针对的是selectedKeys
-          >
-            <Link to={path}>
-              {route.icon}
-              <span>{route.name}</span>
-            </Link>
-          </Menu.Item>
-        );
-      }
+      const path = route.path;
+
+      const inner = (<>
+        <div className={`${prefixCls}-menu-title`}>
+          <span>{route.name}</span>
+        </div>
+        {!isSub && route.routes && !route.hideChildrenInMenu && getMenu(route.routes, true)}
+      </>);
+
+      const menuListItem = (
+        <li
+          className={classNames(`${prefixCls}${isSub ? '-sub' : ''}-menu-li`,
+            {
+              'selected': selectedKey === path,
+            },
+          )}
+          key={path}
+        >
+          {isSub ? <Link to={path}>{inner}</Link> : inner}
+        </li>
+      );
       menuList.push(menuListItem);
     });
-    return menuList;
-  }
 
-  render() {
-    const { selectedKeys, openKeys } = this.state;
-    const { routeList, hideMenu } = this.props;
     return (
-      <div className="main-sider">
-        <Menu
-          className="main-sider-menu"
-          mode="inline"
-          onOpenChange={this.onOpenChange}
-          selectedKeys={selectedKeys}
-          openKeys={hideMenu ? null : openKeys}
-        >
-          {this.generateMenuDom(routeList)}
-        </Menu>
-      </div >
+      <ul className={`${prefixCls}${isSub ? '-sub' : ''}-menu`}>
+        {menuList}
+      </ul>
     );
-  }
+  };
+
+  return (
+    <div className={prefixCls}>
+      {getMenu(routeList)}
+    </div >
+  );
 }
 
-export default withRouter(LeftNav);
+LeftNav.defaultProps = {
+  prefixCls: 'main-sider',
+};

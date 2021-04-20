@@ -1,7 +1,6 @@
 import React from 'react';
-import {
-  AppstoreOutlined,
-} from '@ant-design/icons';
+import * as componentList from 'rcui';
+
 
 export interface RouteItem {
   path: string;
@@ -20,11 +19,24 @@ const menuList: Array<RouteItem> = [
     redirect: '/Home',
   },
   {
-    path: '/Component/StepGuide',
-    name: 'StepGuide 步骤引导',
-    icon: <AppstoreOutlined />,
-    component: 'Component',
+    path: '/Component',
+    name: '数据展示',
+    routes: [
+      {
+        path: '/Component/StepGuide',
+        name: 'StepGuide 步骤引导',
+        component: 'Component',
+      },
+    ],
   },
 ];
 
 export default menuList;
+
+
+function transformer(all) {
+  const componentList = Object.keys(all);
+  console.log(componentList, 22)
+}
+const routeList = transformer(componentList);
+console.log(routeList, 123)
