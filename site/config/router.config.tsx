@@ -2,7 +2,7 @@ import React from 'react';
 import type { RouteProps } from 'react-router-dom';
 import * as componentList from '../../components';
 import Component from '../pages/Component';
-import markdown from '../utils/markdown';
+import getMarkdown from '../utils/markdown';
 
 export interface RouteItem {
   path: string;
@@ -41,16 +41,14 @@ async function getComponentRouteList(all) {
   const compopnentRouteList = [];
   for (let i = 0; i < componentList.length; i++) {
 
-    const mdPath = `components/${componentList[i]}/index.zh-CN.md`;
-    const { default: file } = await import(`../../${mdPath}`);
-    const md = markdown(file, mdPath);
+    const md = await getMarkdown(componentList[i]);
     console.log(md, 999)
 
     compopnentRouteList.push({
-      path: `/Component/${md.title}`,
-      name: `${md.subtitle} ${md.title}`,
+      path: `/Component/${md.document.title}`,
+      name: `${md.document.subtitle} ${md.document.title}`,
       render: (routeProps) => (
-        <Component {...routeProps} markdown={md.content} />
+        <Component {...routeProps} markdown={md} />
       ),
     });
   }

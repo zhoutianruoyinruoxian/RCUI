@@ -1,14 +1,31 @@
 const keys = ['category', 'subtitle', 'type', 'title', 'order', 'cols'];
 
-export default function markdown(md, mdPath) {
+
+
+
+export default async function getMarkdown(path) {
+
+  const { default: document } = await import(`../../components/${path}/index.zh-CN.md`);
+  const { default: demo } = await import(`../../components/${path}/demo/basic.md`);
+  const { default: Demo } = await import(`../../components/${path}/demo/basic.tsx`);
+  return {
+    document: markdown(document, `components/${path}/index.zh-CN.md`),
+    demo: markdown(demo, `components/${path}/demo/basic.md`),
+    Demo,
+  };
+}
+
+
+function markdown(doc, mdPath) {
+
   let markdownData: any = {};
   let pageMsg = '';
   try {
-    pageMsg = md.match(/<hr>(.|\n)*<hr>/)[0];
+    pageMsg = doc.match(/<hr>(.|\n)*<hr>/)[0];
   } catch (e) {
     throw new Error(`The format of file '${mdPath}' is incorrect`);
   }
-  markdownData.content = md.replace(pageMsg, '');
+  markdownData.content = doc.replace(pageMsg, '');
   markdownData = Object.assign({}, markdownData, getTitleMsg(pageMsg, keys));
 
   return markdownData;

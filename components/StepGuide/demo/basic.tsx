@@ -1,32 +1,12 @@
----
-order: 1
-title:
-  en-US: Basic Usage
-  zh-CN: 基本用法
----
-
-## zh-CN
-
-基本用法
-
-## en-US
-
-Basic Usage
-
-`
-
-``` jsx
-
-import { useRef,useEffect } from 'react';
-import { stepGuide } from 'rcui';
+import React, { useRef, useEffect } from 'react';
+import stepGuide from '../index';
 import { Button } from 'antd';
 
 export default function Demo() {
   const tour = useRef(null);
 
   useEffect(() => {
-    setTimeout(()=>{startTour();},2000)
-    
+
     return exit;
   }, []);
 
@@ -113,12 +93,13 @@ export default function Demo() {
   };
 
   const exit = () => {
-    const {current} = tour;
-    if(!current) return;
+    const { current } = tour;
+    if (!current) return;
     current.exit();
   };
   return (
     <>
+      <Button type="primary" onClick={() => { startTour() }}>点我</Button>
       <div style={{ marginLeft: 200, marginTop: 150 }}>
         <div style={{ marginLeft: 100, whiteSpace: 'nowrap' }}>
           <Button id="topLeft">topLeft</Button>
@@ -148,7 +129,3 @@ export default function Demo() {
     </>
   );
 }
-
-ReactDOM.render(<Demo />, mountNode)
-
-````
