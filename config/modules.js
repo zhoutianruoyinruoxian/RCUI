@@ -76,7 +76,7 @@ function getWebpackAliases(options = {}) {
       _paths[o] = path.resolve(__dirname, '.' + options.paths[o][0]);
     });
     return {
-      src: paths.appSrc,
+      site: paths.appSrc,
       ..._paths,
     };
   }

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "sourceMap": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "commonjs",
     "target": "ESNext",
     "jsx": "react",
@@ -15,26 +15,14 @@
       "rcui":[
         "./components"
       ],
-      "src": [
-        "./src"
-      ],
-      "@": [
-        "./src/components"
-      ],
-      "containers": [
-        "./src/containers"
-      ],
-      "lib": [
-        "./src/library"
+      "layout": [
+        "./site/layout"
       ],
       "pages": [
-        "./src/pages"
+        "./site/pages"
       ],
       "hooks": [
-        "./src/hooks"
-      ],
-      "variable": [
-        "./src/style/variable.scss"
+        "./site/hooks"
       ],
     },
     "lib": [
@@ -48,7 +36,7 @@
   },
   "include": [
     "./components/**/*",
-    "./src/**/*"
+    "./site/**/*"
   ],
   "exclude": [
     "node_modules"
