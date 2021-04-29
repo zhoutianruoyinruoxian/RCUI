@@ -1,8 +1,7 @@
 import React from 'react';
 import type { RouteProps } from 'react-router-dom';
-import * as componentList from '../../components';
+import markDown from '../../compile/markdown.json';
 import Component from '../pages/Component';
-import getMarkdown from '../utils/markdown';
 
 export interface RouteItem {
   path: string;
@@ -16,9 +15,8 @@ export interface RouteItem {
   render?: RouteProps['render'];
 }
 
-
-export default async function getRouteList() {
-  const componentRouteList = await getComponentRouteList(componentList);
+export default function getRouteList() {
+  const componentRouteList = getComponentRouteList(markDown);
   const menuList: Array<RouteItem> = [
     {
       path: '/',
@@ -33,24 +31,19 @@ export default async function getRouteList() {
   return menuList;
 }
 
-
-
-async function getComponentRouteList(all) {
-  const componentList = Object.keys(all);
-  // console.log(componentList, 22)
+function getComponentRouteList(markDown) {
   const compopnentRouteList = [];
-  for (let i = 0; i < componentList.length; i++) {
-
-    const md = await getMarkdown(componentList[i]);
-    console.log(md, 999)
-
+  markDown?.children?.forEach(({ folder, file, children }) => {
+    if (file.length <= 0) return;
+    const { md } = file[0];
+    const { meta } = md;
     compopnentRouteList.push({
-      path: `/Component/${md.document.title}`,
-      name: `${md.document.subtitle} ${md.document.title}`,
+      path: `/Component/${meta.title}`,
+      name: `${meta.subtitle} ${meta.title}`,
       render: (routeProps) => (
-        <Component {...routeProps} markdown={md} />
+        <Component {...routeProps} article={md} demo={children} />
       ),
     });
-  }
+  })
   return compopnentRouteList;
 }

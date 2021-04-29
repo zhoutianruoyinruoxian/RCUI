@@ -1,20 +1,26 @@
 import React from 'react';
+import CodeBox from './CodeBox';
 
-export default function ComponentPage({ markdown }: any) {
-  console.log(markdown.demo.content, 888)
-  const Demo = markdown.Demo;
+export default function ComponentPage({ article, demo }: any) {
+  console.log(article, demo, 888)
   return (
     <div className="markdown-container">
-      <div className="demon markdown">
-        <h3>示例：</h3>
-        <Demo />
-      </div>
+      22
+      {/* <div
+        className="markdown"
+        dangerouslySetInnerHTML={{
+          __html: markdown.description,
+        }}
+      />
+      {markdown.example.map((item, index) => (
+        <CodeBox {...item} key={index} />
+      ))}
       <div
         className="markdown"
         dangerouslySetInnerHTML={{
-          __html: markdown.document.content,
+          __html: markdown.content,
         }}
-      />
+      /> */}
     </div>
   );
 }

@@ -5,6 +5,7 @@ type: 其他
 title: StepGuide
 order: 18
 cols: 1
+demo: basic
 ---
 
 穿梭选择框抽象类

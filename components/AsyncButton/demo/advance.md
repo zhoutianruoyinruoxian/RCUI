@@ -1,11 +1,17 @@
 ---
 order: 1
-title: 基本用法
+title: 高级用法
 ---
 
-基本用法
+## zh-CN
 
-```tsx
+高级用法
+
+## en-US
+
+Basic Usage
+
+````jsx
 
 import { AsyncButton } from 'rcui';
 
@@ -23,4 +29,4 @@ function Demo() {
 
 ReactDOM.render(<Demo />, mountNode)
 
-```
+````

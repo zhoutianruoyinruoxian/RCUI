@@ -512,16 +512,16 @@ module.exports = function (webpackEnv) {
             {
               test: /\.md$/,
               use: [
+                // {
+                //   loader: 'html-loader',
+                // },
+                // {
+                //   loader: 'markdown-loader',
+                //   options: {
+                //   },
+                // },
                 {
-                  loader: 'html-loader',
-                },
-                {
-                  loader: 'markdown-loader',
-                  options: {
-                    // remarkOptions: {
-                    //   plugins: [RemarkHTML],
-                    // },
-                  },
+                  loader: 'raw-loader',
                 },
               ],
             },

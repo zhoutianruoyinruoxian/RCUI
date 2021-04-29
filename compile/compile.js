@@ -1,31 +1,39 @@
-const path = require('path');
 const fs = require('fs');
-const renderRoute = require('./route.js');
-const renderPage = require('./page.js');
 
-let markDownList = [];
+const markTwain = require('mark-twain');
+const higlight = require('./higlight');
+const transformer = require('./transformer');
+const toHTML = require('jsonml.js/lib/html.js')
+// const toReactElement = require('jsonml-to-react-element');
+const _ = require('lodash');
 
-const componentPath = path.resolve(__dirname, '../components');
 
-markDownList = readFiles(componentPath, 'components');
-renderRoute(markDownList);
-// renderPage(markDownList);
-debugger
-
-function readFiles(path, folder) {
+module.exports = function readFiles(path, folder) {
   const mdList = {
     file: [],
+    children: [],
   };
   const files = fs.readdirSync(path);
   for (let i = 0; i < files.length; i++) {
     const filePath = path + '/' + files[i];
     const stat = fs.statSync(filePath);
     if (stat.isDirectory() === true) {
-      mdList.children = readFiles(filePath, files[i]);
+      mdList.children.push(readFiles(filePath, files[i]));
     } else if ((/\.md$/.test(files[i]))) {
-      mdList.file.push(filePath);
+      mdList.file.push({
+        filePath,
+        md: transformMarkdown(filePath),
+      });
     }
     mdList.folder = folder;
   }
   return mdList;
+};
+
+function transformMarkdown(filePath) {
+  const md = markTwain(fs.readFileSync(filePath).toString());
+  higlight(md);
+  transformer(md);
+  // md.html = toHTML(md.content);
+  return md;
 }
