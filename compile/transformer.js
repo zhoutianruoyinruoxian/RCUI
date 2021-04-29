@@ -6,7 +6,6 @@ const traverse = require('@babel/traverse').default;
 const generator = require('@babel/generator').default;
 const JsonML = require('jsonml.js/lib/utils.js');
 const getCode = require('./getCode');
-const replaceLib = require('@ant-design/tools/lib/replaceLib');
 
 const errorBoxStyle = {
   padding: 10,
@@ -30,7 +29,6 @@ function requireGenerator(varName, moduleName) {
 }
 const defaultBabelConfig = {
   presets: [
-    '@babel/preset-react',
     [
       '@babel/preset-env',
       {
@@ -46,6 +44,7 @@ const defaultBabelConfig = {
         },
       },
     ],
+    '@babel/preset-react',
   ],
   plugins: [
     [
@@ -58,7 +57,6 @@ const defaultBabelConfig = {
     ],
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-proposal-object-rest-spread',
-    replaceLib,
   ],
 };
 
@@ -141,3 +139,28 @@ function callBack(code, node, fileName, filePath) {
   JsonML.getAttributes(node).realCode = fnCode;
 
 }
+
+// function aaa() {
+//   return {
+//     visitor: {
+//       ImportDeclaration: replacePath,
+//       ExportNamedDeclaration: replacePath,
+//     },
+//   };
+// }
+
+// const replacePath = (nodePath) => {
+//   nodePath.traverse({
+//     enter(_path) {
+//       if (_path.type === "StringLiteral") {
+//         const val = _path.node.value;
+//         if (val === 'rcui') {
+//           _path.node.value = path.resolve(__dirname, '../components');
+//         } else {
+//           console.log(_path, val, 999)
+//           _path.node.value = path.resolve(__dirname, '../node_modules/', val);
+//         }
+//       }
+//     }
+//   })
+// }

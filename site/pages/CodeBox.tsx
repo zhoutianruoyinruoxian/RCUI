@@ -1,28 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export default function ({ markdown, filePath }) {
-  console.log(markdown,filePath,8888)
+export default function ({ markdown, filePath, meta }) {
+  const [demo, setDemo] = useState<any>();
+  console.log(meta, 8888)
   const path = filePath
-  .replace(/.*\/components\//, '../../compile/_data/')
-  .replace('demo/','')
-  .replace('.md','.js');
-  console.log(require('../../compile/_data/AsyncButton/advance.js'),777)
-  const demo = import('../../compile/_data/AsyncButton/advance.js').then(res=>{
+    .replace(/.*\/components\//, '')
+    .replace('demo/', '')
+    .replace('.md', '.js');
 
-    console.log(res, 999)
-  });
+  useEffect(() => {
+    const demoFn = require(`../../compile/_data/${path}`);
+    console.log(demoFn, 8989)
+    setDemo(demoFn())
+  }, [])
+
   return (
     <div className="main-code-box markdown">
-      <h3>示例：</h3>
-
+      <h3>{meta.title['zh-CN']}</h3>
+      {demo}
       <div className="demo markdown" >
         {/* {eval(`(${markdown.realCode})()`)} */}
       </div>
-      <div className="code markdown"
-        dangerouslySetInnerHTML={{
-          __html: markdown.highlighted,
-        }}
-      />
+      <div className="code markdown">
+        <pre className="language-jsx">
+          <code
+            dangerouslySetInnerHTML={{
+              __html: markdown.highlighted,
+            }}
+          />
+        </pre>
+      </div>
     </div>
   );
 }
