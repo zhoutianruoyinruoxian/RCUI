@@ -1,57 +1,26 @@
 import React from 'react';
-import MarkdownIt from 'markdown-it';
-import hljs from 'highlight.js';
 
-// import remark from 'remark';
-// import recommended from 'remark-preset-lint-recommended';
-// import html from 'remark-html';
+export default function ({ markdown, filePath }) {
+  console.log(markdown,filePath,8888)
+  const path = filePath
+  .replace(/.*\/components\//, '../../compile/_data/')
+  .replace('demo/','')
+  .replace('.md','.js');
+  console.log(require('../../compile/_data/AsyncButton/advance.js'),777)
+  const demo = import('../../compile/_data/AsyncButton/advance.js').then(res=>{
 
-import mt from 'mark-twain';
-
-const md = new MarkdownIt({
-  highlight: function (str, lang) {
-    console.log(str, lang, 888)
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value;
-      } catch (__) { }
-    }
-
-    return ''; // use external default escaping
-  },
-});
-
-export default function (props) {
-  // console.log(md.render(props.content), 222)
-  // remark()
-  //   .use(recommended)
-  //   .use(html)
-  //   .process(props.content, function (err, file) {
-  //     // console.error(report(err || file))
-  //     console.log(md.render(props.content), file.contents, 555)
-  //   })
-  console.log(mt(`
-    \`\`\`js
-    // An highlighted block
-    var foo = 'bar';
-      function a() {
-      }
-    \`\`\`
-  `), 777)
+    console.log(res, 999)
+  });
   return (
     <div className="main-code-box markdown">
       <h3>示例：</h3>
 
-      <div className="demo markdown"
-
-        dangerouslySetInnerHTML={{
-          __html: props.description,
-        }}
-      />
+      <div className="demo markdown" >
+        {/* {eval(`(${markdown.realCode})()`)} */}
+      </div>
       <div className="code markdown"
-
         dangerouslySetInnerHTML={{
-          __html: md.render(props.content),
+          __html: markdown.highlighted,
         }}
       />
     </div>

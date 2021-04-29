@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ConfigProvider } from 'antd';
 import './style/theme.less';
+import './style/all.css';
 import zhCN from 'antd/es/locale/zh_CN';
 import Router from './routes';
 import * as serviceWorker from './serviceWorker';

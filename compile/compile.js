@@ -3,8 +3,6 @@ const fs = require('fs');
 const markTwain = require('mark-twain');
 const higlight = require('./higlight');
 const transformer = require('./transformer');
-const toHTML = require('jsonml.js/lib/html.js')
-// const toReactElement = require('jsonml-to-react-element');
 const _ = require('lodash');
 
 
@@ -22,7 +20,8 @@ module.exports = function readFiles(path, folder) {
     } else if ((/\.md$/.test(files[i]))) {
       mdList.file.push({
         filePath,
-        md: transformMarkdown(filePath),
+        fileName: files[i],
+        md: transformMarkdown(filePath, files[i]),
       });
     }
     mdList.folder = folder;
@@ -30,10 +29,9 @@ module.exports = function readFiles(path, folder) {
   return mdList;
 };
 
-function transformMarkdown(filePath) {
+function transformMarkdown(filePath, fileName) {
   const md = markTwain(fs.readFileSync(filePath).toString());
   higlight(md);
-  transformer(md);
-  // md.html = toHTML(md.content);
+  transformer(md, fileName, filePath);
   return md;
 }

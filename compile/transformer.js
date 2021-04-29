@@ -1,9 +1,12 @@
+const fs = require('fs');
+const path = require('path');
 const babel = require('@babel/core');
 const types = require('@babel/types');
 const traverse = require('@babel/traverse').default;
 const generator = require('@babel/generator').default;
 const JsonML = require('jsonml.js/lib/utils.js');
 const getCode = require('./getCode');
+const replaceLib = require('@ant-design/tools/lib/replaceLib');
 
 const errorBoxStyle = {
   padding: 10,
@@ -55,6 +58,7 @@ const defaultBabelConfig = {
     ],
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-proposal-object-rest-spread',
+    replaceLib,
   ],
 };
 
@@ -124,8 +128,16 @@ function transformer(code, babelConfig = {}, noreact) {
 };
 
 
-module.exports = md => getCode(md, callBack, md.code);
+module.exports = (md, fileName, filePath) => getCode(md, (code, node) => callBack(code, node, fileName, filePath));
 
-function callBack(code, node) {
-  JsonML.getAttributes(node).realCode = transformer(code);
+function callBack(code, node, fileName, filePath) {
+  fnCode = transformer(code);
+  const catalog = path.resolve(__dirname, './_data/', filePath.match(/(?<=.*components\/)[^\/]*\//)[0]);
+  const fileLoc = path.resolve(catalog, fileName.replace(/\..*$/, '.js'));
+  if (!fs.existsSync(catalog)) {
+    fs.mkdirSync(catalog);
+  }
+  fs.writeFileSync(fileLoc, `module.exports = ${fnCode}`)
+  JsonML.getAttributes(node).realCode = fnCode;
+
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { RouteProps } from 'react-router-dom';
-import markDown from '../../compile/markdown.json';
+import markDown from '../../compile/_data/markdown.json';
 import Component from '../pages/Component';
 
 export interface RouteItem {
@@ -41,7 +41,7 @@ function getComponentRouteList(markDown) {
       path: `/Component/${meta.title}`,
       name: `${meta.subtitle} ${meta.title}`,
       render: (routeProps) => (
-        <Component {...routeProps} article={md} demo={children} />
+        <Component {...routeProps} article={md} demos={children[0].file} />
       ),
     });
   })

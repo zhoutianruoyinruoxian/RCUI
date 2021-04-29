@@ -9,4 +9,4 @@ function callBack(code, node) {
     Prism.highlight(code, language);
 };
 
-module.exports = (markdown) => getCode(markdown, callBack, markdown.higlight);
+module.exports = (markdown) => getCode(markdown, callBack);

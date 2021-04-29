@@ -1,26 +1,23 @@
 import React from 'react';
 import CodeBox from './CodeBox';
+import toReactElement from 'jsonml-to-react-element';
 
-export default function ComponentPage({ article, demo }: any) {
-  console.log(article, demo, 888)
+export default function ComponentPage({ article, demos }: any) {
+  article.content.splice(1, 1, { className: 'markdown' })
+  const detail = toReactElement(article.content);
   return (
     <div className="markdown-container">
-      22
-      {/* <div
-        className="markdown"
-        dangerouslySetInnerHTML={{
-          __html: markdown.description,
-        }}
-      />
-      {markdown.example.map((item, index) => (
-        <CodeBox {...item} key={index} />
-      ))}
-      <div
-        className="markdown"
-        dangerouslySetInnerHTML={{
-          __html: markdown.content,
-        }}
-      /> */}
+      {
+        demos.map((demo, i) => (
+          <CodeBox
+            key={i}
+            filePath={demo.filePath}
+            markdown={demo.md.content[demo.md.content.length - 1][1]} />
+        ))
+      }
+      <div>
+        {detail}
+      </div>
     </div>
   );
 }
