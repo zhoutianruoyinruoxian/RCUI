@@ -12,7 +12,10 @@
     "baseUrl": ".",
     "locale": "zh-cn",
     "paths": {
-      "rcui":[
+      "compile": [
+        "./compile"
+      ],
+      "rcui": [
         "./components"
       ],
       "utils": [

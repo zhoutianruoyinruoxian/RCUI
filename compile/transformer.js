@@ -126,18 +126,20 @@ function transformer(code, babelConfig = {}, noreact) {
 };
 
 
-module.exports = (md, fileName, filePath) => getCode(md, (code, node) => callBack(code, node, fileName, filePath));
+module.exports = (md, fileName, filePath) => getCode(md, (code, node) => callBack(code, node, fileName, filePath, md));
 
-function callBack(code, node, fileName, filePath) {
+function callBack(code, node, fileName, filePath, md) {
   const fnCode = transformer(code);
-  const catalog = path.resolve(__dirname, './_data/', filePath.match(/(?<=.*components\/)[^/]*\//)[0]);
-  const fileLoc = path.resolve(catalog, fileName.replace(/\..*$/, '.js'));
+  const pathArr = filePath.split(path.sep);
+  const comIndex = pathArr.indexOf('components');
+  const catalog = path.resolve(__dirname, './_data/', pathArr[comIndex + 1]);
+  const fileLoc = path.resolve(catalog, fileName);
   if (!fs.existsSync(catalog)) {
     fs.mkdirSync(catalog);
   }
   fs.writeFileSync(fileLoc, `module.exports = ${fnCode}`);
   // JsonML.getAttributes(node).realCode = fnCode;
-
+  md.previewPath = [pathArr[comIndex + 1], fileName];
 }
 
 // function aaa() {

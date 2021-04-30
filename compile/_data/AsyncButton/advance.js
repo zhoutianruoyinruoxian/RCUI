@@ -16,7 +16,7 @@ module.exports = function bishengPluginReactPreviewer() {
 
     return /*#__PURE__*/React.createElement(_rcui.AsyncButton, {
       onClick: handleClick
-    }, "\u70B9\u51FB");
+    }, "\u9AD8\u7EA7\u7528\u6CD5");
   }
 
   return /*#__PURE__*/React.createElement(Demo, null);

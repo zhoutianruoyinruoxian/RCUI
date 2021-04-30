@@ -22,7 +22,6 @@ export default function ComponentPage({ article, demos }: any) {
           {demos.sort((a, b) => a.md.meta.order - b.md.meta.order).map((demo, i) => (
             <Col span={article.meta.cols === 1 ? 24 : 12} key={i}>
               <Demo
-                filePath={demo.filePath}
                 markdown={demo.md}
               />
             </Col>

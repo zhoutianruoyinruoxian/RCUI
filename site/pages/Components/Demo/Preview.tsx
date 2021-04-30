@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 export default function Preview({ filePath }) {
   const [demo, setDemo] = useState<any>();
-  // console.log(meta, 8888)
-  const path = filePath
-    .replace(/.*\/components\//, '')
-    .replace('demo/', '')
-    .replace('.md', '.js');
 
   useEffect(() => {
-    const demoFn = require(`../../../../compile/_data/${path}`);
+    const demoFn = require(`compile/_data/${filePath.join('/')}`);
     // console.log(demoFn, 8989)
     setDemo(demoFn())
   }, [])

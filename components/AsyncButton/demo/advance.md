@@ -13,7 +13,7 @@ title:
 
 advance Usage
 
-````ts
+````jsx
 
 import { AsyncButton } from 'rcui';
 
@@ -25,7 +25,7 @@ function Demo() {
     }, 2000)
   });
 
-  return (<AsyncButton onClick={handleClick} >点击</AsyncButton>
+  return (<AsyncButton onClick={handleClick} >高级用法</AsyncButton>
   )
 }
 

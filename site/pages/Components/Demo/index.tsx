@@ -5,8 +5,8 @@ import Preview from './Preview';
 import CodeBox from './CodeBox';
 import './style.scss';
 
-export default function Demo({ markdown, filePath }) {
-  const { meta, content, highlighted} = markdown;
+export default function Demo({ markdown }) {
+  const { meta, content, highlighted, previewPath } = markdown;
   const [showCode, setShowCode] = useState(false);
 
   const detail = useMemo(() => {
@@ -27,10 +27,10 @@ export default function Demo({ markdown, filePath }) {
     <div className="main-demo">
       <h4 className="main-demo-title">{meta.title['zh-CN']}</h4>
       {detail}
-      <Preview filePath={filePath} />
+      <Preview filePath={previewPath} />
       <div className="main-demo-toolbar">
         <div className="main-demo-toolbar-btn" onClick={toggleShowCode} >
-          <img className="main-demo-toolbar-btn-icon" src={code} alt=""/>
+          <img className="main-demo-toolbar-btn-icon" src={code} alt="" />
         </div>
         {/* <a className="main-demo-toolbar-btn" onClick={copyCode} >
           复制代码

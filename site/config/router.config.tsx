@@ -24,6 +24,11 @@ export default function getRouteList() {
       redirect: '/Home',
     },
     {
+      path:'/Home',
+      name: '首页',
+      component:'Home/Home',
+    },
+    {
       path: '/Component',
       name: '组件',
       routes: componentRouteList,
