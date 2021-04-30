@@ -13,6 +13,7 @@ import getComponentRouteList from './config/router.config';
 
 moment.locale('zh-cn'); // 设置moment全局语言
 
+
 const renderApp = () => {
   const routeList = getComponentRouteList();
   ReactDOM.render(

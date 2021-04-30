@@ -20,16 +20,17 @@ export default function LeftNav({ prefixCls, routeList }: LeftNavProps) {
     setSelectedKey(pathname);
   }, [pathname]);
 
+  console.log(routeList, 9999999333)
   const getMenu = (routeList: LeftNavProps['routeList'], isSub = false) => {
     const menuList: ReactNode[] = [];
 
-    routeList.map(route => {
+    routeList.forEach(route => {
       if (!route.name || route.hideInMenu) return;
       const path = route.path;
 
       const inner = (<>
         <div className={`${prefixCls}-menu-title`}>
-          <span>{route.name}</span>
+          <span>{isSub ? route.name : route.type}</span>
         </div>
         {!isSub && route.routes && !route.hideChildrenInMenu && getMenu(route.routes, true)}
       </>);

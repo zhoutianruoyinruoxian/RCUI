@@ -13,6 +13,7 @@ export interface RouteItem {
   hideInMenu?: boolean;
   hideChildrenInMenu?: boolean;
   render?: RouteProps['render'];
+  type?: string;
 }
 
 export default function getRouteList() {
@@ -32,7 +33,7 @@ export default function getRouteList() {
 }
 
 function getComponentRouteList(markDown) {
-  console.log(markDown,999)
+  console.log(markDown, 999)
   const compopnentRouteList = [];
   markDown?.children?.forEach(({ folder, file, children }) => {
     if (file.length <= 0) return;
@@ -41,6 +42,7 @@ function getComponentRouteList(markDown) {
     compopnentRouteList.push({
       path: `/Component/${meta.title}`,
       name: `${meta.subtitle} ${meta.title}`,
+      type: meta.type,
       render: (routeProps) => (
         <Component {...routeProps} article={md} demos={children[0].file} />
       ),

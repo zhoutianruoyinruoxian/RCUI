@@ -13,8 +13,6 @@ title:
 
 Basic Usage
 
-`
-
 ``` jsx
 
 import { useRef,useEffect } from 'react';
@@ -151,4 +149,4 @@ export default function Demo() {
 
 ReactDOM.render(<Demo />, mountNode)
 
-````
+```

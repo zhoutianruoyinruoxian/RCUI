@@ -1,7 +1,7 @@
 ---
 category: Components
 subtitle: 异步按钮
-type: 通用
+type: 数据展示
 title: AsyncButton
 order: 1
 cols: 2
