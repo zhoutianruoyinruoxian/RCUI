@@ -24,6 +24,9 @@
       "hooks": [
         "./site/hooks"
       ],
+      "public": [
+        "./public"
+      ],
     },
     "lib": [
       "es5",

@@ -31,7 +31,7 @@ module.exports = function readFiles(path, folder) {
 
 function transformMarkdown(filePath, fileName) {
   const md = markTwain(fs.readFileSync(filePath).toString());
-  higlight(md);
   transformer(md, fileName, filePath);
+  higlight(md);
   return md;
 }

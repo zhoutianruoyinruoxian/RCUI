@@ -1,0 +1,48 @@
+@import '../../../style/variable';
+
+.#{$main}-demo {
+  padding: $primary-padding-size;
+  border: 1px solid $primary-border-color;
+
+  &-title {
+    margin-bottom: $primary-padding-size;
+  }
+}
+
+.#{$main}-demo-preview {
+  padding-bottom: $primary-padding-size;
+}
+
+.#{$main}-demo-toolbar {
+  border-top: 1px dashed $primary-border-color;
+  padding-top: $primary-padding-size;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  &-btn {
+    user-select: none;
+    cursor: pointer;
+    line-height: 20px;
+    transition: all $transition-duration-quick;
+    margin: 5px;
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &-icon {
+      width: 16px;
+    }
+  }
+}
+
+.#{$main}-code-box {
+  margin-top: $primary-padding-size;
+  padding-top: $primary-padding-size;
+  border-top: 1px dashed $primary-border-color;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}

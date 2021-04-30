@@ -103,8 +103,7 @@ module.exports = function bishengPluginReactPreviewer() {
 
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
       style: {
-        marginLeft: 200,
-        marginTop: 150
+        marginLeft: 50
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {

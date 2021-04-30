@@ -1,7 +1,7 @@
 import React from 'react';
 import type { RouteProps } from 'react-router-dom';
 import markDown from '../../compile/_data/markdown.json';
-import Component from '../pages/Component';
+import Component from '../pages/Components';
 
 export interface RouteItem {
   path: string;
@@ -32,6 +32,7 @@ export default function getRouteList() {
 }
 
 function getComponentRouteList(markDown) {
+  console.log(markDown,999)
   const compopnentRouteList = [];
   markDown?.children?.forEach(({ folder, file, children }) => {
     if (file.length <= 0) return;

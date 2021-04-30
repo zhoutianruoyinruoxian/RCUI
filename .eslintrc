@@ -14,9 +14,6 @@
       "legacyDecorators": true
     }
   },
-  "exclude": [
-    "node_modules"
-  ],
   "rules": {
     "new-cap": [
       2,

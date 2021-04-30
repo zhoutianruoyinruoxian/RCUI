@@ -119,7 +119,7 @@ export default function Demo() {
   };
   return (
     <>
-      <div style={{ marginLeft: 200, marginTop: 150 }}>
+      <div style={{ marginLeft: 50}}>
         <div style={{ marginLeft: 100, whiteSpace: 'nowrap' }}>
           <Button id="topLeft">topLeft</Button>
           <Button id="top">top</Button>

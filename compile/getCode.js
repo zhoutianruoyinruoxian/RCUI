@@ -6,12 +6,12 @@ module.exports = (markdownData, fn) => {
 };
 
 function getCodeInner(node) {
+  // console.log(node, JsonML.getChildren(node)[0], 999)
   return JsonML.getChildren(JsonML.getChildren(node)[0] || '')[0] || '';
 }
 
 function inner(node, fn) {
   if (!JsonML.isElement(node)) return;
-
   if (JsonML.getTagName(node) !== 'pre') {
     JsonML.getChildren(node).forEach(item => inner(item, fn));
     return;

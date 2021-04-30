@@ -1,6 +1,8 @@
 ---
 order: 1
-title: 高级用法
+title:
+  en-US: advance Usage
+  zh-CN: 高级用法
 ---
 
 ## zh-CN
@@ -9,15 +11,15 @@ title: 高级用法
 
 ## en-US
 
-Basic Usage
+advance Usage
 
-````jsx
+````ts
 
 import { AsyncButton } from 'rcui';
 
 function Demo() {
 
-  const handleClick = () => new Promise((resolve) => {
+  const handleClick: Promise<any> = () => new Promise((resolve) => {
     setTimeout(() => {
       resolve()
     }, 2000)
