@@ -1,0 +1,53 @@
+@import '../../style/variable';
+@import '../../style/mixin';
+
+$main-header: $main+'-header';
+
+$height:64px;
+
+.main-header {
+  text-align: left;
+  background-color: #fff;
+  padding-left: 0;
+  box-shadow: 0 2px 8px #f0f1f2;
+  height: $height;
+  line-height: $height;
+  display: flex;
+  z-index: 1; // box-shadow某些情况写会被下面的div的盖掉（比如下面的div增加了背景色），所以增加盖参数防止此现象
+
+  &-logo {
+    @include sider;
+    padding: 0 75px;
+    border-right: 1px solid #ddd;
+
+    img {
+      margin-top: 5px;
+      vertical-align: top;
+    }
+  }
+
+  &-left {
+    flex-grow: 1;
+  }
+
+  &-nav {
+    line-height: $height;
+    margin-right: 50px;
+    &-list {
+      a {
+        display: inline-block;
+        padding: 0 20px;
+        color: $default-color;
+      }
+
+      &:hover,
+      &.active {
+        a {
+          color: $primary-color;
+        }
+
+        color: $primary-color;
+      }
+    }
+  }
+}

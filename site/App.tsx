@@ -1,14 +1,28 @@
 import React, { useReducer } from 'react';
 import { Layout, LeftNav, Header, Footer, Content } from 'layout';
 import { reducer } from 'utils';
+import type { RouteItem } from 'site/config/router.config';
 
-const PageContext = React.createContext({});
+interface Store {
+  menuList?: RouteItem[];
+  prefixCls?: string;
+}
+interface Reducer {
+  (store: Store, action: Store): any;
+}
 
-export let dispatch = () => { };
+export const PageContext = React.createContext<Store>({});
 
-function App({ routeList, children}:any) {
+export let dispatch: Function = () => { };
 
-  const [store, setStore] = useReducer(reducer, { routeList});
+function App({ menuList, children }: any) {
+
+  const initStore = {
+    menuList,
+    prefixCls: 'main',
+  };
+
+  const [store, setStore] = useReducer(reducer, initStore);
 
   dispatch = setStore;
 
@@ -17,15 +31,7 @@ function App({ routeList, children}:any) {
       <PageContext.Provider value={store}>
         <Layout>
           <Header />
-          <Layout mode="row">
-            <LeftNav routeList={routeList} />
-            <Layout style={{ position: 'relative' }}>
-              <Content>
-                {children}
-              </Content>
-              <Footer />
-            </Layout>
-          </Layout>
+          {children}
         </Layout>
       </PageContext.Provider>
     </div>

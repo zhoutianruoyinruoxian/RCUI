@@ -9,13 +9,12 @@ import * as serviceWorker from './serviceWorker';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import './style/index.scss';
-import getComponentRouteList from './config/router.config';
+import routeList from './config/router.config';
 
 moment.locale('zh-cn'); // 设置moment全局语言
 
 
 const renderApp = () => {
-  const routeList = getComponentRouteList();
   ReactDOM.render(
     <ConfigProvider locale={zhCN}>
       <Router routeList={routeList} />

@@ -4,7 +4,7 @@ import toReactElement from 'jsonml-to-react-element';
 import { Row, Col } from 'layout';
 import './style.scss';
 
-export default function ComponentPage({ article, demos }: any) {
+export default function Component({ article, demos }: any) {
 
   const detail = useMemo(() => {
     const content = [...article.content];

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, FC } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import App from '../App';
+import { menuList } from 'site/config/router.config';
 import routeTransform from './config';
 
 const supportsHistory = 'pushState' in window.history;
@@ -25,7 +26,7 @@ const Router: FC<any> = ({ routeList }) => {
   }, []);
   return (
     <BrowserRouter forceRefresh={!supportsHistory}>
-      <App routeList={routeList}>
+      <App menuList={menuList}>
         <Switch>
           {children}
         </Switch>

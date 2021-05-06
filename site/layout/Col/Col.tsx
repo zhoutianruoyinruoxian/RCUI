@@ -15,7 +15,7 @@ export default function Col({ prefixCls, className, span, rowStyle, style, ...ot
       className={classNames(
         `${prefixCls}-col`,
         `${prefixCls}-col-${span}`,
-        className
+        className,
       )}
       style={{
         ...rowStyle,
@@ -23,10 +23,10 @@ export default function Col({ prefixCls, className, span, rowStyle, style, ...ot
       }}
       {...others}
     />
-  )
+  );
 }
 
 Col.defaultProps = {
   prefixCls: 'main',
   span: 24,
-}
+};
