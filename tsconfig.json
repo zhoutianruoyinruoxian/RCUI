@@ -12,8 +12,8 @@
     "baseUrl": ".",
     "locale": "zh-cn",
     "paths": {
-      "compile": [
-        "./compile"
+      "_data": [
+        "./_data"
       ],
       "rcui": [
         "./components"

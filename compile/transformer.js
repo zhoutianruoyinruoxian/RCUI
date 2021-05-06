@@ -132,7 +132,7 @@ function callBack(code, node, fileName, filePath, md) {
   const fnCode = transformer(code);
   const pathArr = filePath.split(path.sep);
   const comIndex = pathArr.indexOf('components');
-  const catalog = path.resolve(__dirname, './_data/', pathArr[comIndex + 1]);
+  const catalog = path.resolve(__dirname, '../_data/', pathArr[comIndex + 1]);
   const fileLoc = path.resolve(catalog, fileName);
   if (!fs.existsSync(catalog)) {
     fs.mkdirSync(catalog);

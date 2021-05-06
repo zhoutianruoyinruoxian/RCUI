@@ -4,7 +4,7 @@ export default function Preview({ filePath }) {
   const [demo, setDemo] = useState<any>();
 
   useEffect(() => {
-    const demoFn = require(`compile/_data/${filePath.join('/')}`);
+    const demoFn = require(`_data/${filePath.join('/')}`);
     // console.log(demoFn, 8989)
     setDemo(demoFn())
   }, [])
