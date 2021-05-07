@@ -1,44 +1,55 @@
 @import '../../../style/variable';
 
 .#{$main}-demo {
-  padding: 32px 24px;
   border: 1px solid $primary-border-color;
 
-  &-title {
-    margin-bottom: $primary-padding-size;
+  &-desc {
+    position: relative;
+    border-top: 1px solid $primary-border-color;
+    padding: $padding-sm;
+
+    h4 {
+      position: absolute;
+      top: -11px;
+      padding: 0 $padding-xs;
+      background-color: #fff;
+    }
   }
 }
 
 .#{$main}-demo-preview {
-  padding-bottom: $primary-padding-size;
+  padding: 32px 24px;
 }
 
 .#{$main}-demo-toolbar {
   border-top: 1px dashed $primary-border-color;
-  padding-top: $primary-padding-size;
+  padding-top: $padding-xs;
+  padding-bottom: $padding-xs;
   display: flex;
   flex-direction: row;
   justify-content: center;
 
   &-btn {
+    $line-height: 20px;
     user-select: none;
     cursor: pointer;
-    line-height: 20px;
+    line-height: $line-height;
     transition: all $transition-duration-quick;
-    margin: 5px;
+    margin: 0 5px;
+
     &:hover {
       transform: scale(1.1);
     }
 
     &-icon {
-      width: 16px;
+      height: $line-height;
+      padding: ($line-height - 16px) / 2 0;
     }
   }
 }
 
 .#{$main}-code-box {
-  margin-top: $primary-padding-size;
-  padding-top: $primary-padding-size;
+  padding: $primary-padding-size;
   border-top: 1px dashed $primary-border-color;
   display: none;
 

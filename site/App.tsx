@@ -6,6 +6,7 @@ import type { RouteItem } from 'site/config/router.config';
 interface Store {
   menuList?: RouteItem[];
   prefixCls?: string;
+  lang: 'zn-CN' | 'en-US';
 }
 interface Reducer {
   (store: Store, action: Store): any;
@@ -20,6 +21,7 @@ function App({ menuList, children }: any) {
   const initStore = {
     menuList,
     prefixCls: 'main',
+    lang: 'zh-CN',
   };
 
   const [store, setStore] = useReducer(reducer, initStore);

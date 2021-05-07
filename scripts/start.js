@@ -32,9 +32,9 @@ const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
 const createDevServerConfig = require('../config/webpackDevServer.config');
 
-const start = require('../compile/start');
+// const start = require('../compile/start');
 
-start();
+// start();
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;

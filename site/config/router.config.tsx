@@ -25,7 +25,7 @@ export interface ComponentRouteItem {
 }
 
 function getComponentRouteList(markDown) {
-  console.log(markDown, 999);
+  // console.log(markDown, 999);
   const compopnentRouteList: ComponentRouteItem[] = [];
   markDown?.forEach(({ file, children }, index) => {
     const { md } = file[0];
