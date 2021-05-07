@@ -2,17 +2,27 @@
 
 .#{$main}-demo {
   border: 1px solid $primary-border-color;
+  margin-top: $margin-md;
+
+  &:first-child {
+    margin-top: 0;
+  }
 
   &-desc {
     position: relative;
     border-top: 1px solid $primary-border-color;
-    padding: $padding-sm;
+    padding: $padding-sm $padding-lg;
 
     h4 {
       position: absolute;
       top: -11px;
+      left: $padding-lg - $padding-xs;
       padding: 0 $padding-xs;
       background-color: #fff;
+    }
+
+    article {
+      white-space: pre-line;
     }
   }
 }

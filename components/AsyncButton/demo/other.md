@@ -1,5 +1,5 @@
 ---
-order: 1
+order: 2
 title:
   en-US: advance Usage
   zh-CN: 高级用法
@@ -8,7 +8,6 @@ title:
 ## zh-CN
 
 这是高级用法
-这是案例
 
 ## en-US
 

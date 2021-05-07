@@ -13,21 +13,48 @@ export default function Component({ article, demos }: any) {
     return toReactElement(con);
   }, []);
 
+  const renderDemo = () => {
+    const demoList = demos.sort((a, b) => a.md.meta.order - b.md.meta.order);
+    if (article.meta.cols === 1) {
+      return (
+        <Row gutter={8}>
+          <Col span={24}>
+            {demoList.map((demo, i) => (
+              <Demo
+                key={i} // eslint-disable-line
+                markdown={demo.md}
+              />
+            ))}
+          </Col>
+        </Row>
+      );
+    } else {
+      const list = [[], []];
+      demoList.forEach((demo, i) => {
+        const item = (
+          <Demo
+            key={i}  // eslint-disable-line
+            markdown={demo.md}
+          />
+        );
+        list[i % 2].push(item);
+      });
+      return (
+        <Row gutter={8}>
+          <Col span={12}>{list[0]}</Col>
+          <Col span={12}>{list[1]}</Col>
+        </Row>
+      );
+    }
+  };
+
   return (
     <div className="main-component">
       <h3 style={{ marginTop: 0 }}>{article.meta.title}</h3>
       {renderMarkdown(content.article)}
       <h3>示例</h3>
       <section className="main-component-demo-section">
-        <Row gutter={8}>
-          {demos.sort((a, b) => a.md.meta.order - b.md.meta.order).map((demo, i) => (
-            <Col span={article.meta.cols === 1 ? 24 : 12} key={i}> {/* eslint-disable-line */}
-              <Demo
-                markdown={demo.md}
-              />
-            </Col>
-          ))}
-        </Row>
+        {renderDemo()}
       </section>
       {renderMarkdown(content.api, 'api-container')}
     </div >

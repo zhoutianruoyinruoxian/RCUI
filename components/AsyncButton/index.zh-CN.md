@@ -5,7 +5,6 @@ type: 数据展示
 title: AsyncButton
 order: 1
 cols: 2
-demo: basic
 ---
 ### 说明
 

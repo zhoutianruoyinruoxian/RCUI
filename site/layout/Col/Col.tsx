@@ -29,4 +29,5 @@ export default function Col({ prefixCls, className, span, rowStyle, style, ...ot
 Col.defaultProps = {
   prefixCls: 'main',
   span: 24,
+  rowStyle: {},
 };

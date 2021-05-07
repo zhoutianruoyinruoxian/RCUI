@@ -1,9 +1,9 @@
 import React, { useMemo, useState, useContext } from 'react';
 import toReactElement from 'jsonml-to-react-element';
 import { PageContext } from 'site/App';
-import code from 'public/code.svg';
 import Preview from './Preview';
 import CodeBox from './CodeBox';
+import ToolBar from './ToolBar';
 import './style.scss';
 
 export default function Demo({ markdown }) {
@@ -17,10 +17,6 @@ export default function Demo({ markdown }) {
     setShowCode(!showCode);
   };
 
-  const copyCode = () => {
-
-  };
-
   return (
     <div className={`${prefixCls}-demo`}>
       <Preview filePath={previewPath} />
@@ -28,14 +24,7 @@ export default function Demo({ markdown }) {
         <h4>{meta.title[lang]}</h4>
         {detail}
       </div>
-      <div className={`${prefixCls}-demo-toolbar`}>
-        <div className={`${prefixCls}-demo-toolbar-btn`} onClick={toggleShowCode} >
-          <img className={`${prefixCls}-demo-toolbar-btn-icon`} src={code} alt="" />
-        </div>
-        {/* <a className="main-demo-toolbar-btn" onClick={copyCode} >
-          复制代码
-        </a> */}
-      </div>
+      <ToolBar prefixCls={prefixCls} toggleShowCode={toggleShowCode} />
       <CodeBox highlighted={highlighted} visible={showCode} />
     </div>
   );
