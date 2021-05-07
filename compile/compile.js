@@ -1,11 +1,12 @@
 const fs = require('fs');
 const path = require('path');
+const { isDemo } = require('./utils');
 
 const markTwain = require('mark-twain');
-const higlight = require('./higlight');
-const transformer = require('./transformer');
-const _ = require('lodash');
-
+const getContent = require('./article/content');
+const getHiglight = require('./demo/higlight');
+const getPreview = require('./demo/preview');
+const getLanguage = require('./demo/language');
 
 module.exports = function readFiles(_path, folder) {
   const mdList = {
@@ -31,8 +32,17 @@ module.exports = function readFiles(_path, folder) {
 };
 
 function transformMarkdown(filePath, fileName) {
+  const markdown = {};
   const md = markTwain(fs.readFileSync(filePath).toString());
-  transformer(md, fileName.replace(/\..*$/, '.js'), filePath);
-  higlight(md);
-  return md;
+  const { content } = md;
+  // 如果有js代码，处理js代码
+  if (isDemo(filePath)) {
+    markdown.previewPath = getPreview(content, fileName.replace(/\..*$/, '.js'), filePath);
+    markdown.highlighted = getHiglight(content);
+    markdown.content = getLanguage(content);
+  } else {
+    markdown.content = getContent(content);
+  }
+  markdown.meta = md.meta;
+  return markdown;
 }

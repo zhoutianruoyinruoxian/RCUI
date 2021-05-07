@@ -10,7 +10,7 @@ export default function Demo({ markdown }) {
   const [showCode, setShowCode] = useState(false);
 
   const detail = useMemo(() => {
-    const con = [...content];
+    const con = [...content['zh-CN']];
     con.splice(1, 0, { className: 'markdown' });
     return toReactElement(con);
   }, [content]);

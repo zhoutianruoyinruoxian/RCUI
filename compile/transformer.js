@@ -1,11 +1,7 @@
-const fs = require('fs');
-const path = require('path');
 const babel = require('@babel/core');
 const types = require('@babel/types');
 const traverse = require('@babel/traverse').default;
 const generator = require('@babel/generator').default;
-const JsonML = require('jsonml.js/lib/utils.js');
-const getCode = require('./getCode');
 
 const errorBoxStyle = {
   padding: 10,
@@ -60,7 +56,7 @@ const defaultBabelConfig = {
   ],
 };
 
-function transformer(code, babelConfig = {}, noreact) {
+module.exports = function transformer(code, babelConfig = {}, noreact) {
   let codeAst = null;
 
   try {
@@ -124,45 +120,3 @@ function transformer(code, babelConfig = {}, noreact) {
 
   return generator(types.program([previewFunction]), {}, code).code;
 };
-
-
-module.exports = (md, fileName, filePath) => getCode(md, (code, node) => callBack(code, node, fileName, filePath, md));
-
-function callBack(code, node, fileName, filePath, md) {
-  const fnCode = transformer(code);
-  const pathArr = filePath.split(path.sep);
-  const comIndex = pathArr.indexOf('components');
-  const catalog = path.resolve(__dirname, '../_data/', pathArr[comIndex + 1]);
-  const fileLoc = path.resolve(catalog, fileName);
-  if (!fs.existsSync(catalog)) {
-    fs.mkdirSync(catalog);
-  }
-  fs.writeFileSync(fileLoc, `module.exports = ${fnCode}`);
-  // JsonML.getAttributes(node).realCode = fnCode;
-  md.previewPath = [pathArr[comIndex + 1], fileName];
-}
-
-// function aaa() {
-//   return {
-//     visitor: {
-//       ImportDeclaration: replacePath,
-//       ExportNamedDeclaration: replacePath,
-//     },
-//   };
-// }
-
-// const replacePath = (nodePath) => {
-//   nodePath.traverse({
-//     enter(_path) {
-//       if (_path.type === "StringLiteral") {
-//         const val = _path.node.value;
-//         if (val === 'rcui') {
-//           _path.node.value = path.resolve(__dirname, '../components');
-//         } else {
-//           console.log(_path, val, 999)
-//           _path.node.value = path.resolve(__dirname, '../node_modules/', val);
-//         }
-//       }
-//     }
-//   })
-// }

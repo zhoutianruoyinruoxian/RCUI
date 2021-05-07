@@ -5,4 +5,5 @@ $main-row: $main+'-row';
 .#{$main-row} {
   display: flex;
   flex-flow: row wrap;
+  row-gap: 16px,
 }

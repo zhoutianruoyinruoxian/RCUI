@@ -9,37 +9,43 @@ export interface RouteItem {
   icon?: React.ReactNode;
   redirect?: string;
   component?: string;
-  routes?: Array<RouteItem>;
+  routes?: RouteItem[] | ComponentRouteItem[];
   hideInMenu?: boolean;
   hideChildrenInMenu?: boolean;
   render?: RouteProps['render'];
-  type?: string;
+}
+
+export interface ComponentRouteItem {
+  path: string;
   order?: number;
+  name?: string;
+  redirect?: string;
+  type?: string;
+  render?: RouteProps['render'];
 }
 
 function getComponentRouteList(markDown) {
-  // console.log(markDown, 999);
-  const compopnentRouteList: RouteItem[] = [];
-  markDown?.children?.filter(({ file }) => file.length > 0)
-    .forEach(({ file, children }, index) => {
-      const { md } = file[0];
-      const { meta } = md;
-      if (index === 0) {
-        compopnentRouteList.push({
-          path: '/Component',
-          redirect: `/Component/${meta.title}`,
-        });
-      }
+  console.log(markDown, 999);
+  const compopnentRouteList: ComponentRouteItem[] = [];
+  markDown?.forEach(({ file, children }, index) => {
+    const { md } = file[0];
+    const { meta } = md;
+    if (index === 0) {
       compopnentRouteList.push({
-        path: `/Component/${meta.title}`,
-        name: `${meta.subtitle} ${meta.title}`,
-        type: meta.type,
-        order: meta.order,
-        render: (routeProps) => (
-          <Component {...routeProps} article={md} demos={children[0].file} />
-        ),
+        path: '/Component',
+        redirect: `/Component/${meta.title}`,
       });
+    }
+    compopnentRouteList.push({
+      path: `/Component/${meta.title}`,
+      name: `${meta.subtitle} ${meta.title}`,
+      type: meta.type,
+      order: meta.order,
+      render: (routeProps) => (
+        <Component {...routeProps} article={md} demos={children[0].file} />
+      ),
     });
+  });
   return compopnentRouteList;
 }
 
@@ -77,5 +83,5 @@ export function getMenuList(list: RouteItem[]) {
 }
 
 export const menuList = getMenuList(routeList);
-
+// console.log(routeList,888)
 export default routeList;

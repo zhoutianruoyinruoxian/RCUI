@@ -14,6 +14,12 @@ $title-line-height:36px;
   &-menu {
     padding: 20px 0;
     min-height: 100%;
+
+    &-title {
+      margin: 4px 24px 8px 40px;
+      color: rgba($default-color, 0.5);
+      border-bottom: 1px solid #f0f0f0;
+    }
   }
 
   &-sub-menu {
@@ -24,21 +30,22 @@ $title-line-height:36px;
       a {
         display: block;
         color: $default-color;
-      }
+        transition: all $transition-duration-slow;
 
-      &.selected a {
-        color: $primary-color;
-        background-color: rgba($primary-color, 0.15);
-      }
+        &.active {
+          color: $primary-color;
+          background-color: rgba($primary-color, 0.15);
+        }
 
-      &:hover a {
-        color: $primary-color;
+        &:hover {
+          color: $primary-color;
+        }
       }
     }
-  }
 
-  &-menu-title {
-    margin: 4px 0 8px;
-    padding: 0 16px 0 40px;
+    &-title {
+      margin: 4px 0 8px;
+      padding: 0 16px 0 40px;
+    }
   }
 }

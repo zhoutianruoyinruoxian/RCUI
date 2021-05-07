@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { Layout, LeftNav, Header, Footer, Content } from 'layout';
+import { Layout, Header } from 'layout';
 import { reducer } from 'utils';
 import type { RouteItem } from 'site/config/router.config';
 

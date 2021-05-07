@@ -13,17 +13,17 @@ export default function Row({ prefixCls, className, style, gutter, children, ...
 
   const rowStyles = gutter ? {
     ...style,
-    marginLeft: `-${gutter}px`,
-    marginRight: `-${gutter}px`,
+    marginLeft: -gutter,
+    marginRight: gutter,
   } : style;
 
   const colChild = React.Children.map(children, child => {
     return React.cloneElement(child, {
       rowStyle: gutter ? {
-        paddingLeft: `${gutter}px`,
-        paddingRight: `${gutter}px`,
-      } : {}
-    })
+        paddingLeft: gutter,
+        paddingRight: gutter,
+      } : {},
+    });
   });
 
   return (
@@ -38,10 +38,10 @@ export default function Row({ prefixCls, className, style, gutter, children, ...
     >
       {colChild}
     </div>
-  )
+  );
 }
 
 Row.defaultProps = {
   gutter: 0,
   prefixCls: 'main',
-}
+};

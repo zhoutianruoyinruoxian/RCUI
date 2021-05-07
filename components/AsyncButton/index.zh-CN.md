@@ -9,7 +9,7 @@ demo: basic
 ---
 ### 说明
 
-异步按钮
+异步按钮，自动触发loading
 
 ## API
 

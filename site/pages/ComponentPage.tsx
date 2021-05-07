@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Layout, LeftNav, Content } from 'layout';
+import { Layout, ComponentLeftNav, Content } from 'layout';
 import { PageContext } from 'site/App';
 
 export default function ComponentPage({ children }) {
@@ -14,7 +14,7 @@ export default function ComponentPage({ children }) {
 
   return (
     <Layout mode="row">
-      <LeftNav navlist={navList} />
+      <ComponentLeftNav navlist={navList} />
       <Layout style={{ position: 'relative' }}>
         <Content>
           {children}

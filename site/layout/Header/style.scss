@@ -33,20 +33,17 @@ $height:64px;
   &-nav {
     line-height: $height;
     margin-right: 50px;
+
     &-list {
       a {
         display: inline-block;
         padding: 0 20px;
         color: $default-color;
-      }
 
-      &:hover,
-      &.active {
-        a {
+        &:hover,
+        &.active {
           color: $primary-color;
         }
-
-        color: $primary-color;
       }
     }
   }
