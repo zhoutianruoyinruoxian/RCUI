@@ -57,6 +57,6 @@ export default function Component({ article, demos }: any) {
         {renderDemo()}
       </section>
       {renderMarkdown(content.api, 'api-container')}
-    </div >
+    </div>
   );
 }

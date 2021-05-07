@@ -35,7 +35,7 @@ function transformMarkdown(filePath, fileName) {
   const markdown = {};
   const md = markTwain(fs.readFileSync(filePath).toString());
   const { content } = md;
-  // 如果有js代码，处理js代码
+  // demo和article分开处理
   if (isDemo(filePath)) {
     markdown.previewPath = getPreview(content, fileName.replace(/\..*$/, '.js'), filePath);
     markdown.highlighted = getHiglight(content);

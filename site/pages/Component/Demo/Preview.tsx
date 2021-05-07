@@ -6,12 +6,13 @@ export default function Preview({ filePath }) {
   useEffect(() => {
     const demoFn = require(`_data/${filePath.join('/')}`);
     // console.log(demoFn, 8989)
-    setDemo(demoFn())
-  }, [])
+    setDemo(demoFn());
+  }, []);
+
   return (
 
     <div className="main-demo-preview" >
       {demo}
     </div>
-  )
+  );
 }

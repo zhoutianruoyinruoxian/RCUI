@@ -15,8 +15,7 @@ const routeTransform: RouteTransform = async (list) => {
       continue;
     }
     if (route.component) {
-      const file = await import('site/pages/' + route.component);
-      const Component = file.default;
+      const { default: Component } = await import('site/pages/' + route.component);
       let children = null;
       let exact = true;
       if (route.routes) {
