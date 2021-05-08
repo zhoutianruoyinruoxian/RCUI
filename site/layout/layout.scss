@@ -14,6 +14,11 @@
 }
 
 .main-layout-content {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  height: inherit;
+  overflow: auto;
   flex-grow: 1;
   padding: 22px 20px;
 }
@@ -21,14 +26,14 @@
 
 
 
-.main-content {
-  padding: 20px;
-  background-color: #fff;
+// .main-content {
+//   padding: 20px;
+//   background-color: #fff;
 
-  h1 {
-    margin-bottom: 0;
-  }
-}
+//   h1 {
+//     margin-bottom: 0;
+//   }
+// }
 
 .main-footer {
   text-align: center;

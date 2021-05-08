@@ -14,7 +14,7 @@ export default function Row({ prefixCls, className, style, gutter, children, ...
   const rowStyles = gutter ? {
     ...style,
     marginLeft: -gutter,
-    marginRight: gutter,
+    marginRight: -gutter,
   } : style;
 
   const colChild = React.Children.map(children, child => {

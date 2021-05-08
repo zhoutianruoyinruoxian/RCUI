@@ -1,7 +1,7 @@
 import React from 'react';
 import type { RouteProps } from 'react-router-dom';
 import markDown from '../../_data/markdown.json';
-import Component from '../pages/Component';
+import Component from '../pages/Component/Component';
 
 export interface RouteItem {
   path: string;
@@ -62,7 +62,7 @@ const routeList: Array<RouteItem> = [
   {
     path: '/Component',
     name: '组件',
-    component: 'ComponentPage',
+    component: 'Component',
     routes: componentRouteList,
   },
 ];

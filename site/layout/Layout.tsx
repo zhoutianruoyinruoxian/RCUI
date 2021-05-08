@@ -5,8 +5,8 @@ import type { BasicProps } from './types';
 interface LayoutProps extends BasicProps {
   mode?: 'col' | 'row';
 }
-
 export default function Layout({ prefixCls, mode = 'col', children }: LayoutProps) {
+
   return (
     <div
       className={
