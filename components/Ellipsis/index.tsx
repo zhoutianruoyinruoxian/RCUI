@@ -57,7 +57,7 @@ const Ellipsis: FC<EllipsisProps> = ({ prefixCls, className, content, placement,
 };
 
 Ellipsis.defaultProps = {
-  prefixCls: 'rc-ellipsis',
+  prefixCls: 'rcui-ellipsis',
   placement: 'top',
 };
 

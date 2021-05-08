@@ -1,13 +1,13 @@
 ---
-order: 0
+order: 1
 title:
   en-US: Basic Usage
-  zh-CN: 基本用法
+  zh-CN: 内置图标
 ---
 
 ## zh-CN
 
-基本用法
+里面可以包含React. Node类型
 
 ## en-US
 
@@ -17,15 +17,23 @@ Basic Usage
 
 import { useState } from 'react';
 import { Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Ellipsis } from 'rcui';
 
 function Demo() {
-  const [text, setText] = useState('短文本');
 
+  const [text, setText] = useState('短文本');
   return (
     <div>
-      <div style={{ width: 70, backgroundColor: '#ddd', padding: '2px 6px' }}>
-        <Ellipsis content={text} />
+      <div style={{ width: 100, backgroundColor: '#ddd', padding: '2px 6px' }}>
+        <Ellipsis
+          content={
+            <>
+              <DeleteOutlined />
+              <span>{text}</span>
+            </>
+          }
+        />
       </div>
       <br />
       <Button onClick={() => setText('短文本')}>短文本</Button>&nbsp;&nbsp;

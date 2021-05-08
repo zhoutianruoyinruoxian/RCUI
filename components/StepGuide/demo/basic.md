@@ -23,8 +23,6 @@ export default function Demo() {
   const tour = useRef(null);
 
   useEffect(() => {
-    setTimeout(()=>{startTour();},2000)
-    
     return exit;
   }, []);
 
@@ -117,6 +115,7 @@ export default function Demo() {
   };
   return (
     <>
+      <Button onClick={() => startTour()} type="primary">点我</Button>
       <div style={{ marginLeft: 50}}>
         <div style={{ marginLeft: 100, whiteSpace: 'nowrap' }}>
           <Button id="topLeft">topLeft</Button>

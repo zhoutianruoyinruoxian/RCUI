@@ -38,7 +38,7 @@ function getComponentRouteList(markDown) {
     }
     compopnentRouteList.push({
       path: `/Component/${meta.title}`,
-      name: `${meta.subtitle} ${meta.title}`,
+      name: `${meta.title} ${meta.subtitle}`,
       type: meta.type,
       order: meta.order,
       render: (routeProps) => (

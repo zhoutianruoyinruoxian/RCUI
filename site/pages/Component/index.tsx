@@ -50,7 +50,7 @@ export default function Component({ article, demos }: any) {
 
   return (
     <div className="main-component">
-      <h3 style={{ marginTop: 0 }}>{article.meta.title}</h3>
+      <h2 style={{ marginTop: 0 }}>{article.meta.title} {article.meta.subtitle}</h2>
       {renderMarkdown(content.article)}
       <h3>示例</h3>
       <section className="main-component-demo-section">

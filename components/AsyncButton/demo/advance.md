@@ -1,35 +1,39 @@
 ---
 order: 1
 title:
-  en-US: advance Usage
-  zh-CN: 高级用法
+  en-US: set loading delay
+  zh-CN: 设置loading延迟
 ---
 
 ## zh-CN
 
-这是高级用法
-这是案例
+可以设置`delay`属性，延迟`loading`
 
 ## en-US
 
 advance Usage
 
-````jsx
+``` jsx
 
 import { AsyncButton } from 'rcui';
 
 function Demo() {
 
-  const handleClick: Promise<any> = () => new Promise((resolve) => {
+  const handleClick = () => new Promise((resolve) => {
     setTimeout(() => {
       resolve()
     }, 2000)
   });
 
-  return (<AsyncButton onClick={handleClick} >高级用法</AsyncButton>
+  return (
+    <AsyncButton
+      delay={1000}
+      onClick={handleClick}
+      type="primary"
+    >延迟loading</AsyncButton>
   )
 }
 
 ReactDOM.render(<Demo />, mountNode)
 
-````
+```

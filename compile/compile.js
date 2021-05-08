@@ -8,7 +8,7 @@ const getHiglight = require('./demo/higlight');
 const getPreview = require('./demo/preview');
 const getLanguage = require('./demo/language');
 
-module.exports = function readFiles(_path, folder) {
+function readFiles(_path, folder) {
   const mdList = {
     file: [],
     children: [],
@@ -29,7 +29,7 @@ module.exports = function readFiles(_path, folder) {
     mdList.folder = folder;
   }
   return mdList;
-};
+}
 
 function transformMarkdown(filePath, fileName) {
   const markdown = {};
@@ -46,3 +46,13 @@ function transformMarkdown(filePath, fileName) {
   markdown.meta = md.meta;
   return markdown;
 }
+
+module.exports = function start(next) {
+  fs.rmdirSync(path.resolve(__dirname, '../_data/'), { recursive: true });
+  fs.mkdirSync(path.resolve(__dirname, '../_data/'));
+  const componentPath = path.resolve(__dirname, '../components');
+  const markDownList = readFiles(componentPath, 'components');
+  const componentList = markDownList.children.filter(({ file }) => file.length > 0);
+  next && next(componentList);
+  fs.writeFileSync(path.resolve(__dirname, '../_data/markdown.json'), JSON.stringify(componentList));
+};

@@ -7,7 +7,7 @@ title:
 
 ## zh-CN
 
-这是基本用法
+基本用法
 
 ## en-US
 
@@ -25,7 +25,7 @@ function Demo() {
     }, 2000)
   });
 
-  return (<AsyncButton onClick={handleClick} >点击</AsyncButton>
+  return (<AsyncButton onClick={handleClick} type="primary" >点击</AsyncButton>
   )
 }
 
