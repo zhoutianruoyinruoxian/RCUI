@@ -25,7 +25,7 @@ export interface ComponentRouteItem {
 }
 
 function getComponentRouteList(markDown) {
-  console.log(markDown, 999);
+  // console.log(markDown, 999);
   const compopnentRouteList: ComponentRouteItem[] = [];
   markDown?.forEach(({ file, children }, index) => {
     const { md } = file[0];
@@ -49,27 +49,23 @@ function getComponentRouteList(markDown) {
   return compopnentRouteList;
 }
 
-function getRouterList() {
-
-  const componentRouteList = getComponentRouteList(markDown);
-  const routeList: Array<RouteItem> = [
-    {
-      path: '/',
-      redirect: '/Home',
-    },
-    {
-      path: '/Home',
-      component: 'Home/Home',
-    },
-    {
-      path: '/Component',
-      name: '组件',
-      component: 'ComponentPage',
-      routes: componentRouteList,
-    },
-  ];
-  return routeList;
-}
+const componentRouteList = getComponentRouteList(markDown);
+const routeList: Array<RouteItem> = [
+  {
+    path: '/',
+    redirect: '/Home',
+  },
+  {
+    path: '/Home',
+    component: 'Home/Home',
+  },
+  {
+    path: '/Component',
+    name: '组件',
+    component: 'ComponentPage',
+    routes: componentRouteList,
+  },
+];
 
 
 export function getMenuList(list: RouteItem[]) {
@@ -86,6 +82,6 @@ export function getMenuList(list: RouteItem[]) {
   return menuList;
 }
 
-export const menuList = getMenuList(getRouterList());
+export const menuList = getMenuList(routeList);
 // console.log(routeList,888)
-export default getRouterList;
+export default routeList;

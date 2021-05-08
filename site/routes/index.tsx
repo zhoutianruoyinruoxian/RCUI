@@ -6,24 +6,24 @@ import routeTransform from './config';
 
 const supportsHistory = 'pushState' in window.history;
 
-
-const Router: FC<any> = ({ routeList }) => {
+const Router: FC<any> = () => {
   const [children, setChildren] = useState(null);
 
   useEffect(() => {
     async function fetchRoute() {
-      const _children = await routeTransform(routeList);
+      const _children = await routeTransform();
       setChildren(_children);
     }
-    // if (process.env.NODE_ENV !== 'production' && (module as any).hot) {
-    //   (module as any).hot.accept('./config', async () => {
-    //     console.log('loading HMR...'); // eslint-disable-line
-    //     await fetchRoute();
-    //     console.log('loading success!'); // eslint-disable-line
-    //   });
-    // }
+    if (process.env.NODE_ENV !== 'production' && (module as any).hot) {
+      (module as any).hot.accept('./config', async () => {
+        console.log('loading HMR...'); // eslint-disable-line
+        await fetchRoute();
+        console.log('loading success!'); // eslint-disable-line
+      });
+    }
     fetchRoute();
   }, []);
+
   return (
     <BrowserRouter forceRefresh={!supportsHistory}>
       <App menuList={menuList}>

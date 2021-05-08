@@ -33,6 +33,7 @@ $height:64px;
   &-nav {
     line-height: $height;
     margin-right: 50px;
+    display: flex;
 
     &-list {
       a {

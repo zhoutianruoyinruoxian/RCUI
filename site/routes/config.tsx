@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { RouteItem } from 'site/config/router.config';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import routeList from 'site/config/router.config';
+import type { RouteItem } from 'site/config/router.config';
 
 type RouteTransform = (list: RouteItem[], path?: string) => Promise<any[]>;
 
@@ -28,7 +29,9 @@ const routeTransform: RouteTransform = async (list) => {
           sensitive
           component={() =>
             <Component>
-              {children}
+              <Switch>
+                {children}
+              </Switch>
             </Component>
           }
           path={route.path}
@@ -57,7 +60,7 @@ const routeTransform: RouteTransform = async (list) => {
   return routerList;
 };
 
-export default async (routeList) => {
+export default async () => {
   const children = await routeTransform(routeList);
   return children;
 };

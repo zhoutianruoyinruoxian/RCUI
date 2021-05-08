@@ -6,7 +6,7 @@ import type { RouteItem } from 'site/config/router.config';
 interface Store {
   menuList?: RouteItem[];
   prefixCls?: string;
-  lang: 'zn-CN' | 'en-US';
+  lang?: 'zn-CN' | 'en-US';
 }
 interface Reducer {
   (store: Store, action: Store): any;
