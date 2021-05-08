@@ -1,0 +1,17 @@
+.main-error-boundary {
+  background-color: #fff2f0;
+  border: 1px solid #ffccc7;
+  padding: 15px;
+  border-radius: 2px;
+
+  &-message {
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+  }
+
+  &-description {
+    font-size: 13px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.65);
+  }
+}

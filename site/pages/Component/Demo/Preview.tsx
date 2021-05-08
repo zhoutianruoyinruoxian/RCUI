@@ -1,28 +1,21 @@
-import React from 'react';
-import { Alert } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { ErrorBoundary } from 'layout';
 
-const { ErrorBoundary } = Alert;
-export default class Preview extends React.Component<any> {
+export default function Preview({ filePath }) {
+  const [demo, setDemo] = useState<any>(null);
 
-  state = {
-    demo: null,
-  }
+  useEffect(() => {
+    const demoFn = require(`_data/${filePath.join('/')}`);
+    // console.log(demoFn, 8989)
+    setDemo(demoFn());
+  }, []);
 
-  componentDidMount() {
-    const { filePath } = this.props;
-    const demo = require(`_data/${filePath.join('/')}`);
-    this.setState({ demo });
-  }
+  return (
 
-  render() {
-    const { demo } = this.state;
-    return (
-
-      <div className="main-demo-preview" >
-        <ErrorBoundary>
-          {demo ? demo() : null}
-        </ErrorBoundary>
-      </div>
-    );
-  }
+    <div className="main-demo-preview" >
+      <ErrorBoundary>
+        {demo}
+      </ErrorBoundary>
+    </div>
+  );
 }

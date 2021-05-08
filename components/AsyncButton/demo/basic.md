@@ -13,7 +13,7 @@ title:
 
 Basic Usage
 
-````jsx
+``` jsx
 
 import { AsyncButton } from 'rcui';
 
@@ -31,4 +31,4 @@ function Demo() {
 
 ReactDOM.render(<Demo />, mountNode)
 
-````
+```
