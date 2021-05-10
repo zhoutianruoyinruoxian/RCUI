@@ -1,23 +1,23 @@
 ---
 order: 1
 title:
-  en-US: advance Usage
+  en-US: Advanced Usage
   zh-CN: 高级用法
 ---
 
 ## zh-CN
 
-高级用法
+高级用法,通过effect函数可以实现引导隐藏元素的功能
 
 ## en-US
 
-advance Usage
+Advanced Usage
 
-````jsx
+``` jsx
 
 import { useRef, useEffect } from 'react';
-import { stepGuide } from 'rcui';
 import { Button } from 'antd';
+import { stepGuide } from 'rcui';
 
 export default function Demo() {
   const tour = useRef(null);
@@ -32,6 +32,7 @@ export default function Demo() {
         element: '#step1',
         title: '第1步',
         content: '这是第1步',
+        placement: 'right',
         useEffect(next, dom) {
           dom.parentNode.style.cssText += 'left:-50px';
           setTimeout(next, 300);
@@ -45,12 +46,6 @@ export default function Demo() {
         title: '第2步',
         content: '这是第2步',
         placement: 'right',
-      },
-      {
-        element: '#step3',
-        title: '第3步',
-        content: '这是第3步',
-        placement: 'right',
         useEffect(next, dom) {
           dom.parentNode.style.cssText += 'left:-50px';
           setTimeout(next, 300);
@@ -60,9 +55,9 @@ export default function Demo() {
         },
       },
       {
-        element: '#step4',
-        title: '第4步',
-        content: '这是第4步,这一步没什么特别的',
+        element: '#step3',
+        title: '第3步',
+        content: '这是第3步,这一步没什么特别的',
       },
     ]);
   };
@@ -76,9 +71,8 @@ export default function Demo() {
     <>
       <Button onClick={() => startTour()} type="primary">点我</Button>
       <div style={{ marginLeft: 200 }}>
-        <Button id="step2">嘿嘿</Button>
         <div
-          id="step4"
+          id="step3"
           style={{
             marginLeft: 100,
             whiteSpace: 'nowrap',
@@ -98,7 +92,7 @@ export default function Demo() {
             <span style={{
               display: 'inline-block',
               width: '100%',
-              backgroundColor: '#fff',
+              backgroundColor: '#ddd',
               padding: 10,
             }}
             >哈哈哈</span>
@@ -132,7 +126,7 @@ export default function Demo() {
             <span style={{
               display: 'inline-block',
               width: '100%',
-              backgroundColor: '#fff',
+              backgroundColor: '#ddd',
               padding: 10,
             }}
             >哈哈哈2</span>
@@ -144,7 +138,7 @@ export default function Demo() {
                 padding: 10,
                 color: '#fff',
               }}
-              id="step3"
+              id="step2"
             >删除</span>
           </div>
         </div>
@@ -155,4 +149,4 @@ export default function Demo() {
 
 ReactDOM.render(<Demo />, mountNode)
 
-````
+```
