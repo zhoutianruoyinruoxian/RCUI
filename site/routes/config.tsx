@@ -2,6 +2,7 @@ import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import routeList from 'site/config/router.config';
 import type { RouteItem } from 'site/config/router.config';
+export { menuList } from 'site/config/router.config';
 
 type RouteTransform = (list: RouteItem[], path?: string) => Promise<any[]>;
 
