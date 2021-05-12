@@ -1,5 +1,5 @@
-function getCodeIndex(node, key) {
-  return node.findIndex(item => {
+function getCodeIndex(content, key) {
+  return content.findIndex(item => {
     if (Array.isArray(item)) {
       return item[0] === key;
     }
@@ -9,7 +9,7 @@ function getCodeIndex(node, key) {
   });
 }
 
-const getCode = (node, key) => node.find(item => {
+const getCode = (content, key) => content.find(item => {
   if (Array.isArray(item)) {
     return item[0] === key;
   }
@@ -21,7 +21,7 @@ const getCode = (node, key) => node.find(item => {
 
 const isDemo = filePath => filePath.includes('demo');
 
-const getContentIndex = (node, lang) => node.findIndex(item => {
+const getContentIndex = (content, lang) => content.findIndex(item => {
   if (Array.isArray(item)) {
     return item[1] === lang;
   }
