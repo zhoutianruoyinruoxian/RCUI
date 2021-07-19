@@ -1,13 +1,18 @@
-const fs = require('fs');
-const path = require('path');
+const start = require('../../compile/compile');
 
-let count = 1;
+let load = false;
 
-module.exports = function rcuiDataLoader(/* content */) {
+module.exports = function rcuiDataLoader(content) {
   if (this.cacheable) {
     this.cacheable();
   }
-  count++;
-  fs.writeFileSync(path.resolve(__dirname, './aaa.js'), count);
+  if (load === false) {
+    load = true;
+    // 采用异步，在项目启动阶段保证start只执行一次
+    setTimeout(() => {
+      start();
+      load = false;
+    }, 0);
+  }
   return '';
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { RouteProps } from 'react-router-dom';
-import markDown from '../../_data/markdown.json';
+import markDown from '../../_data/markdown.js';
 import Component from '../pages/Component/Component';
 
 export interface RouteItem {

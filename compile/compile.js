@@ -15,20 +15,34 @@ module.exports = function start(next, reload) {
   console.log('compiling...');
   const componentPath = path.resolve(__dirname, `../${COMPONENTS}`);
   let componentList;
+  let importList = [];
   try {
     if (reload) {
       componentList = compile(reload.path);
     } else {
       fs.rmdirSync(path.resolve(__dirname, '../_data/demo'), { recursive: true });
       mkdirp.sync(path.resolve(__dirname, '../_data/demo'));
-      const markDownList = readFiles(componentPath, COMPONENTS);
+      const fileData = readFiles(componentPath, COMPONENTS);
+      const [markDownList] = fileData;
+      importList = fileData[1];
       componentList = markDownList.children.filter(({ file }) => file.length > 0);
     }
     next && next(componentList);
-    fs.writeFileSync(path.resolve(__dirname, '../_data/markdown.json'), JSON.stringify(componentList));
+    const contentText = `export default ${JSON.stringify(componentList)};`;
+    let content = '';
+    if (process.env.NODE_ENV === 'production') {
+      content = contentText;
+    } else {
+      let importText = '';
+      importList.forEach((o, i) => {
+        importText += o.replace(/.*(?=\/components)/, `import { a${i} } from '..`) + `';`
+      });
+      content = importText + contentText;
+    }
+    fs.writeFileSync(path.resolve(__dirname, '../_data/markdown.js'), content);
     console.log('compile success!');
   } catch (e) {
-    console.log(e, 88)
+    console.log(e, 'compile Error')
   }
 };
 
@@ -37,24 +51,28 @@ function readFiles(_path, folder) {
   const mdList = {
     file: [],
     children: [],
+    folder,
   };
+  let importList = [];
   const files = fs.readdirSync(_path);
   for (let i = 0; i < files.length; i++) {
     const fileName = files[i];
     const filePath = path.resolve(__dirname, _path, fileName);
     const stat = fs.statSync(filePath);
     if (stat.isDirectory() === true) {
-      mdList.children.push(readFiles(filePath, fileName));
+      const [child, childImportList] = readFiles(filePath, fileName);
+      mdList.children.push(child);
+      importList = importList.concat(childImportList);
     } else if ((/\.md$/.test(fileName))) {
       mdList.file.push({
         filePath,
         fileName,
         md: transformMarkdown(filePath),
       });
+      importList.push(filePath);
     }
-    mdList.folder = folder;
   }
-  return mdList;
+  return [mdList, importList];
 }
 
 function transformMarkdown(filePath) {
@@ -73,6 +91,7 @@ function transformMarkdown(filePath) {
   return markdown;
 }
 
+// todo
 function compile(filePath) {
   const markDownList = require('../_data/markdown.json');
   function find(list) {
