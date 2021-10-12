@@ -42,7 +42,7 @@ module.exports = function start(next, reload) {
     fs.writeFileSync(path.resolve(__dirname, '../_data/markdown.js'), content);
     console.log('compile success!');
   } catch (e) {
-    console.log(e, 'compile Error')
+    console.log(e, 'compile Error');
   }
 };
 

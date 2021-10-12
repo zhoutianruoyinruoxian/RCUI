@@ -9,16 +9,11 @@ import { useState, useEffect } from 'react';
 import { Form } from 'antd';
 import { FormInstance } from 'antd/lib/Form';
 
-export type UseBindForm = (initFormData?: object, _form?: FormInstance) =>
-  [FormInstance, object, React.Dispatch<React.SetStateAction<object>>];
-
-const useBindForm: UseBindForm = (initFormData, _form) => {
+export default function useBindForm<T>(initFormData?: T, _form?: FormInstance): [FormInstance, T, React.Dispatch<React.SetStateAction<T>>] {
   const [form] = Form.useForm(_form);
-  const [formData, setFormData] = useState(initFormData || {});
+  const [formData, setFormData] = useState<T>(initFormData || {} as T);
   useEffect(() => {
     form.setFieldsValue(formData);
   }, [formData]);
   return [form, formData, setFormData];
-};
-
-export default useBindForm;
+}

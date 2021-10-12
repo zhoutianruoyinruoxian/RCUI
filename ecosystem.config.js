@@ -19,7 +19,7 @@ module.exports = {
       repo: 'ssh://git@gitlab.prod.dtstack.cn:10022/visdev/easyvui.git',
       path: '/root/easyvui',
       'post-deploy': 'npm i --unsafe-perm=true && npm run site',
-      'pre-deploy-local': `echo 'Deploy Done!'`,
+      'pre-deploy-local': "echo 'Deploy Done!'",
       env: {
         NODE_ENV: 'production',
       },
