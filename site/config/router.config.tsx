@@ -3,6 +3,14 @@ import type { RouteProps } from 'react-router-dom';
 import markDown from '../../_data/markdown.js';
 import Component from '../pages/Component/Component';
 
+export interface ComponentRouteItem {
+  path: string;
+  order?: number;
+  name?: string;
+  redirect?: string;
+  type?: string;
+  render?: RouteProps['render'];
+}
 export interface RouteItem {
   path: string;
   name?: string;
@@ -15,14 +23,6 @@ export interface RouteItem {
   render?: RouteProps['render'];
 }
 
-export interface ComponentRouteItem {
-  path: string;
-  order?: number;
-  name?: string;
-  redirect?: string;
-  type?: string;
-  render?: RouteProps['render'];
-}
 
 function getComponentRouteList(markDown) {
   // console.log(markDown, 999);
@@ -42,7 +42,7 @@ function getComponentRouteList(markDown) {
       type: meta.type,
       order: meta.order,
       render: (routeProps) => (
-        <Component {...routeProps} article={md} demos={children[0].file} />
+        <Component {...routeProps} article={md} demos={children[0]?.file} />
       ),
     });
   });

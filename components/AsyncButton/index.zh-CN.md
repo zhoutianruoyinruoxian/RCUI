@@ -8,7 +8,7 @@ cols: 2
 ---
 ### 说明
 
-异步按钮，自动触发loading，无需手动设置
+异步按钮，无需手动设置loading，只需返回一个promise，AsyncButton会自动根据promise的状态触发loading。
 
 ## API
 
