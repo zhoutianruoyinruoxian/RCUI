@@ -12,11 +12,11 @@ export default function CopyButton({ id, targetId, ...others }: CopyButtonProps)
 
   const clipboardRef = useRef(null);
 
-  const sourceId = useMemo(() => id || `copySource-${new Date().getTime()}`, []);
+  const sourceId = useMemo(() => id || `copySource-${Date.now()}`, []);
 
   useEffect(() => {
     init();
-    return destory;
+    return destroy;
   }, []);
 
   const init = () => {
@@ -35,9 +35,8 @@ export default function CopyButton({ id, targetId, ...others }: CopyButtonProps)
     });
   };
 
-  const destory = () => {
-    clipboardRef.current.off('success');
-    clipboardRef.current.off('error');
+  const destroy = () => {
+    clipboardRef.current.destroy();
   };
 
   return (
