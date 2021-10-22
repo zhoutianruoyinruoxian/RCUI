@@ -2,12 +2,12 @@
 order: 2
 title:
   en-US: Basic Usage
-  zh-CN: 基本用法
+  zh-CN: 异步请求数据
 ---
 
 ## zh-CN
 
-基本用法
+异步请求数据
 
 ## en-US
 
@@ -18,7 +18,7 @@ Basic Usage
 import { useState } from 'react';
 import { Cascade } from 'rcui';
   
-const options = [
+const optionLists = [
   {
     value:'1',
     label:'文本1',
@@ -35,15 +35,30 @@ const options = [
 
 function Demo() {
 
+  const [options, setOptions] = useState(optionLists);
   const [value, setValue] = useState([]);
   const [loading, setLoading] = useState([]);
   const [isLeaf, setIsLeaf] = useState('');
 
-  const getData = ()=>{
+  const getData = (targetOption)=>{
     
+    // const targetOption = selectedOptions[selectedOptions.length - 1];
+    targetOption.loading = true;
+
     setTimeout(()=>{
-      
-    })
+      targetOption.loading = false;
+      targetOption.children = [
+        {
+          label: '新增的数据1122',
+          value: '1122',
+        },
+        {
+          label: '新增的数据2233',
+          value: '2233',
+        },
+      ];
+      setOptions([...options]);
+    }, 1000);
   }
 
   return (
@@ -55,6 +70,7 @@ function Demo() {
           setValue(val);
           setIsLeaf(leaf);
         }}
+        loadData={getData}
         category={['第一类', '第二类', '第三类']}
       />
       <br/>

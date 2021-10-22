@@ -22,7 +22,7 @@ interface ItemProps extends BasicProps {
   value?: Value;
   list?: Option[];
   showAll?: boolean;
-  onChange?: (value: Value) => void;
+  onChange?: (value: Value, selectedOption: Option) => void;
 }
 
 export const ALL = Symbol('all') as any;
@@ -43,12 +43,13 @@ export default function Item(props: ItemProps) {
     setSelected(propsValue);
   }, [propsValue]);
 
-  const handleClick = ({ value, disabled }: Option) => {
+  const handleClick = (item: Option) => {
+    const { value, disabled } = item;
     if (disabled || value === selected) return;
     if (!Reflect.has(props, 'value')) {
       setSelected(value);
     }
-    onChange?.(value);
+    onChange?.(value, item);
   };
 
   return (

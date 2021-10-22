@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
+import { useUpdateEffect } from '../hooks';
 import { BasicProps } from '../types';
 import Item, { ALL } from './Item';
 import type { Value as ValueItem, Option } from './Item';
@@ -12,10 +13,10 @@ interface CascadeProps extends BasicProps {
   showAll?: boolean;
   defaultValue?: Value;
   value?: Value;
-  onChange?: (selected: Value, isLeaf?: boolean) => void;
   options: Option[];
-  loadData: () => {};
   category?: ReactNode[];
+  onChange?: (value: Value, isLeaf?: boolean) => void;
+  loadData: (selectedOption: Option) => {};
 }
 
 const getList = (selected: Value, list: Option[]) => {
@@ -48,35 +49,42 @@ export default function Cascade(props: CascadeProps) {
   const [selected, setSelected] = useState(propsValue || defaultValue || []);
   const [renderList, setRenderList] = useState<Option[][]>([]);
 
+  useUpdateEffect(() => {
+    setSelected(propsValue);
+    setRenderList(getRenderList(propsValue));
+  }, [propsValue]);
+
   useEffect(() => {
     setRenderList(getRenderList(selected));
-  }, [propsValue, options]);
+  }, [options]);
 
-  const handleSelect = (val: ValueItem, i: number) => {
+
+  const handleSelect = (val: ValueItem, opt: Option, i: number) => {
     if (val === ALL) {
       selectAll(i);
     } else {
-      selectItem(val, i);
+      selectItem(val, opt, i);
     }
   };
 
-  const selectItem = (val: ValueItem, i: number) => {
+  const selectItem = async (val: ValueItem, opt: Option, i: number) => {
     const newSelected = [...selected];
     newSelected.splice(i, newSelected.length - i, val);
-    const newRenderList = getRenderList(newSelected);
-    setSelected(newSelected);
-    setRenderList(newRenderList);
-    if (newRenderList.length > newSelected.length) {
-      //级联还没选择完毕
-      //loaddata的逻辑
+    if (!Reflect.has(props, 'value')) {
+      setSelected(newSelected);
+    }
+    if (loadData && !(opt.children?.length > 0)) {
+      // 异步数据
+      await loadData(opt); //此处的异步没有用
       onChange?.(newSelected, false);
     } else {
-      //级联已经选中最终节点
-      onChange?.(newSelected, true);
+      const newRenderList = getRenderList(newSelected);
+      setRenderList(newRenderList);
+      onChange?.(newSelected, newRenderList.length < newSelected.length);
     }
   };
 
-  const selectAll = (i:number) => {
+  const selectAll = (i: number) => {
     const newSelected = [...selected];
     newSelected.splice(i);
     const newRenderList = getRenderList([...newSelected, ALL]);
@@ -86,6 +94,7 @@ export default function Cascade(props: CascadeProps) {
   };
 
   const getRenderList = (selected: Value) => [options].concat(getList(selected, options));
+  console.log(renderList, 111)
 
   return (
     <div className={prefixCls}>
@@ -97,7 +106,7 @@ export default function Cascade(props: CascadeProps) {
             prefixCls={prefixCls}
             list={list}
             value={selected[i]}
-            onChange={val => handleSelect(val, i)}
+            onChange={(val, opt) => handleSelect(val, opt, i)}
           />
         </div>
       ))}
