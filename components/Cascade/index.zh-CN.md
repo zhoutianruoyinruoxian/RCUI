@@ -1,9 +1,9 @@
 ---
 category: Components
-subtitle: 自动隐藏
-type: 数据展示
-title: Ellipsis
-order: 2
+subtitle: 级联选择
+type: 特殊交互
+title: Cascade
+order: 0
 cols: 2
 ---
 
@@ -13,9 +13,11 @@ cols: 2
 
 ## API
 
+注：每选中一个节点都会触发onChange事件，可以通过onChange事件的isLeaf参数获取是否为叶子节点
+
 ### AsyncButton
 
 | 参数 | 说明 | 类型 | 默认值 |
 | :--- | :--- | :--- | :--- |
 | content |  内容 | React.Node | - |
-| placement | 位置，参考antd的Popover | PopoverProps\['placement'\] | top |
+| placement | 位置，参考antd的Popover | PopoverProps['placement'] | top |

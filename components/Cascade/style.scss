@@ -1,0 +1,45 @@
+$cascade:'rcui-cascade';
+
+.#{$cascade} {
+
+  &-row {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+
+    &-label {
+      font-weight: bold;
+      margin-right: 8px;
+    }
+  }
+
+  &-item {
+    padding: 4px 0;
+
+    &-tag {
+      padding: 0 8px;
+      line-height: 22px;
+      display: inline-block;
+      cursor: pointer;
+      transition: all var(--transition-duration-slow);
+      border-radius: 2px;
+
+      &:not(:last-of-type) {
+        margin-right: 8px;
+      }
+
+      &:hover {
+        color: var(--primary-color);
+      }
+
+      &.active {
+        color: #fff;
+        background-color: var(--primary-color);
+      }
+
+      &.disabled {
+        cursor: not-allowed;
+      }
+    }
+  }
+}

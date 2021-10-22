@@ -1,5 +1,8 @@
-import React from 'react';
+import { CSSProperties, ReactChild } from 'react';
 
-export default interface BasicProps<T = HTMLDivElement> extends React.HTMLAttributes<T> {
+export default interface BasicProps {
   prefixCls?: string;
+  style?: CSSProperties;
+  className?: string;
+  children?: ReactChild;
 }
