@@ -15,7 +15,7 @@ interface CascadeProps extends BasicProps {
   options: Option[];
   category?: ReactNode[];
   onChange?: (value: Value, isLeaf?: boolean) => void;
-  loadData: (selectedOption: Option) => {};
+  loadData?: (selectedOption: Option) => void;
 }
 
 const getList = (selected: Value, list: Option[]) => {
@@ -87,7 +87,9 @@ export default function Cascade(props: CascadeProps) {
     const newSelected = [...selected];
     newSelected.splice(i);
     const newRenderList = getRenderList([...newSelected, ALL]);
-    setSelected(newSelected);
+    if (!Reflect.has(props, 'value')) {
+      setSelected(newSelected);
+    }
     setRenderList(newRenderList);
     onChange?.(newSelected, false);
   };

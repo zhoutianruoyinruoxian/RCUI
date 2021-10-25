@@ -14,6 +14,16 @@
       "legacyDecorators": true
     }
   },
+  "overrides": [
+    {
+      "files": [
+        "**/*.ts?(x)"
+      ],
+      "rules": {
+        "@typescript-eslint/ban-types": 2
+      }
+    }
+  ],
   "rules": {
     "new-cap": [
       2,
@@ -56,7 +66,9 @@
     "quotes": [
       2,
       "single",
-      { "avoidEscape": true }
+      {
+        "avoidEscape": true
+      }
     ], //单引号
     "no-console": 1, //警告console
     "no-alert": 1, //禁止使用alert confirm prompt
