@@ -40,7 +40,7 @@ export default function Item(props: ItemProps) {
   const [selected, setSelected] = useState<Value>(propsValue || defaultValue || ALL);
 
   useUpdateEffect(() => {
-    setSelected(propsValue);
+    setSelected(propsValue || ALL);
   }, [propsValue]);
 
   const handleClick = (item: Option) => {

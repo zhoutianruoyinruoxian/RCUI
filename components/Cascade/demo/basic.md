@@ -63,7 +63,7 @@ function Demo() {
   return (
     <div>
       <Cascade
-        value={value}
+        defaultValue="1"
         options={options}
         onChange={(val, leaf)=>{
           setValue(val);
