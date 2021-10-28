@@ -73,6 +73,7 @@
     "react-app-polyfill": "^1.0.6",
     "react-dev-utils": "^10.2.1",
     "react-dom": "^16.13.1",
+    "react-instantsearch-dom": "^6.12.1",
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "remark": "^13.0.0",
