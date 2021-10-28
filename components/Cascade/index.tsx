@@ -96,11 +96,13 @@ export default function Cascade(props: CascadeProps) {
 
   const getRenderList = (selected: Value) => [options].concat(getList(selected, options));
 
+  const renderLabel = label => (<span className={`${prefixCls}-row-label`}>{label}: </span>);
+
   return (
     <div className={prefixCls}>
       {renderList.map((list, i) => (
         <div className={`${prefixCls}-row`} key={i}>
-          {category?.length > 0 && <span className={`${prefixCls}-row-label`}>{category[i]}: </span>}
+          {category?.length > 0 && renderLabel(category[i])}
           <Item
             showAll={showAll}
             prefixCls={prefixCls}
@@ -112,7 +114,7 @@ export default function Cascade(props: CascadeProps) {
       ))}
       {loadData && renderList[renderList.length - 1]?.findIndex(({ loading }) => loading) > -1 &&
         <div className={`${prefixCls}-row`} >
-          {category[renderList.length] && <span className={`${prefixCls}-row-label`}>{category[renderList.length]}: </span>}
+          {category[renderList.length] && renderLabel(category[renderList.length])}
           <div className={`${prefixCls}-loading`} />
         </div>
       }
