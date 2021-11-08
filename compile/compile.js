@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const mkdirp = require('mkdirp');
-const { isDemo } = require('./utils');
+const { isDemo, getCommonPath } = require('./utils');
 
 const markTwain = require('mark-twain');
 const getContent = require('./article/content');
@@ -35,7 +35,7 @@ module.exports = function start(next, reload) {
     } else {
       let importText = '';
       importList.forEach((o, i) => {
-        importText += o.replace(/.*(?=\/components)/, `import { a${i} } from '..`) + `';`
+        importText += getCommonPath(o).replace(/.*(?=\/components)/, `import { a${i} } from '..`) + "';";
       });
       content = importText + contentText;
     }

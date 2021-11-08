@@ -1,3 +1,5 @@
+const path = require('path');
+
 function getCodeIndex(content, key) {
   return content.findIndex(item => {
     if (Array.isArray(item)) {
@@ -27,9 +29,14 @@ const getContentIndex = (content, lang) => content.findIndex(item => {
   }
 });
 
+// 将不同操作系统下的路径标识符（通过path.sep获取；window系统为'\',mac为'/'）统一转换成'/'。
+// 处理'\'字符非常麻烦，所以转换为'/'。
+const getCommonPath = filePath => filePath.split(path.sep).join('/');
+
 module.exports = {
   getCodeIndex,
   getCode,
   isDemo,
   getContentIndex,
+  getCommonPath,
 };
