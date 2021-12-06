@@ -12,7 +12,7 @@ const getLanguage = require('./demo/language');
 const COMPONENTS = 'components';
 
 module.exports = function start(next, reload) {
-  console.log('compiling...');
+  console.log('md compiling...');
   const componentPath = path.resolve(__dirname, `../${COMPONENTS}`);
   let componentList;
   let importList = [];
@@ -33,6 +33,7 @@ module.exports = function start(next, reload) {
     if (process.env.NODE_ENV === 'production') {
       content = contentText;
     } else {
+      // 生产环境下，为了方便开发者修改markdown后webpack能够出发hmr，额外在引入一遍markdown文件，让site引入
       let importText = '';
       importList.forEach((o, i) => {
         importText += getCommonPath(o).replace(/.*(?=\/components)/, `import { a${i} } from '..`) + "';";
@@ -40,9 +41,9 @@ module.exports = function start(next, reload) {
       content = importText + contentText;
     }
     fs.writeFileSync(path.resolve(__dirname, '../_data/markdown.js'), content);
-    console.log('compile success!');
+    console.log('md compile success!');
   } catch (e) {
-    console.log(e, 'compile Error');
+    console.log(e, 'md compile Error');
   }
 };
 
