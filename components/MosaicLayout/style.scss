@@ -1,0 +1,42 @@
+$mosaic-layout:'rcui-mosaic-layout';
+
+.#{$mosaic-layout} {
+  position: relative;
+
+  &-split {
+    position: absolute;
+    height: inherit;
+    cursor: col-resize;
+    flex-shrink: 0;
+    top: 0;
+    bottom: 0;
+    user-select: none;
+    z-index: 10;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 50%;
+      height: inherit;
+      left: 25%;
+      top: 0;
+      background-color: transparent;
+      transition: all .1s;
+    }
+
+    &:hover,
+    &.active {
+      &::before {
+        background-color: #1890ff;
+        box-shadow: 0 0 0 1px #1890ff;
+      }
+    }
+  }
+
+  &-content {
+    position: absolute;
+    overflow: auto;
+    top: 0;
+    z-index: 5;
+  }
+}
