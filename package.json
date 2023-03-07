@@ -183,7 +183,7 @@
         {
           "libraryName": "antd",
           "libraryDirectory": "lib",
-          "style": "true"
+          "style": false
         },
         "antd"
       ],

@@ -1,0 +1,22 @@
+.high-light {
+  display: flex;
+  font-size: 14px;
+  color: rgba(246, 246, 247, 0.88);
+  line-height: 20px;
+  margin-bottom: 8px;
+
+  &>p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:first-of-type {
+      direction: rtl;
+      text-align: left;
+    }
+    strong {
+      font-weight: normal;
+      color: var(--primary-color);
+    }
+  }
+}

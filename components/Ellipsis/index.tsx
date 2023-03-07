@@ -42,16 +42,14 @@ const Ellipsis: FC<EllipsisProps> = ({ prefixCls, className, content, placement,
 
   return (
     <>
-      {
-        ellipsis ?
-          <Popover
-            placement={placement}
-            content={<div className={`${prefixCls}-tooltip`}>{content}</div>}
-          >
-            {contentDom}
-          </Popover> :
-          contentDom
-      }
+      {ellipsis ?
+        <Popover
+          placement={placement}
+          content={<div className={`${prefixCls}-tooltip`}>{content}</div>}
+        >
+          {contentDom}
+        </Popover> :
+        contentDom}
     </>
   );
 };

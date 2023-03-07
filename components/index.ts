@@ -6,3 +6,4 @@ export { default as Ellipsis } from './Ellipsis';
 export { default as CopyButton } from './CopyButton';
 export { default as Cascade } from './Cascade';
 export { default as MosaicLayout } from './MosaicLayout';
+export { default as Waterfall } from './Waterfall';
