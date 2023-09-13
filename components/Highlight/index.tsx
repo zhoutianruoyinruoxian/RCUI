@@ -9,9 +9,11 @@ interface HighlightProps {
 export default function Highlight({ content, keyword }: HighlightProps) {
 
   const value = useMemo(() => {
+    if (!keyword || !content.includes(keyword)) {
+      return `<span>${content}</span>`;
+    }
     let highlightContent = content?.replace(keyword, v => {
-      const { length } = v;
-      const split = Math.ceil(length / 2);
+      const split = Math.ceil(v.length / 2);
       return `<strong>${v.slice(0, split)}</strong></p><p><strong>${v.slice(split)}</strong>`;
     });
     highlightContent = `<p>${highlightContent}</p>`;

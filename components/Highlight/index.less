@@ -1,19 +1,30 @@
 .high-light {
   display: flex;
+  align-items: center;
   font-size: 14px;
   color: rgba(246, 246, 247, 0.88);
   line-height: 20px;
   margin-bottom: 8px;
 
-  &>p {
+  .ellipsis() {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+  }
 
-    &:first-of-type {
+  &>span {
+    .ellipsis();
+  }
+
+  &>p {
+    .ellipsis();
+    margin-bottom: 0;
+
+    &:first-child {
       direction: rtl;
       text-align: left;
     }
+
     strong {
       font-weight: normal;
       color: var(--primary-color);
